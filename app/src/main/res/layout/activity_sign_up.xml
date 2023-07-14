@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".SignUpActivity">
+    tools:context=".ManHinh.SignUpActivity">
 
     <ImageButton
         android:id="@+id/ibtnBack"
@@ -60,7 +60,7 @@
         android:background="@drawable/shape_edt"
         android:padding="10dp"
         android:layout_marginTop="5dp"
-        />
+        android:inputType="textPassword"/>
 
     <Button
         android:id="@+id/btnSignUp"
@@ -71,6 +71,7 @@
         app:strokeColor="@color/black"
         android:backgroundTint="@color/blue"
         app:strokeWidth="1dp"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+      />
 
 </LinearLayout>
