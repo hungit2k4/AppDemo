@@ -13,13 +13,13 @@
         android:theme="@style/Theme.AppDemo"
         tools:targetApi="31">
         <activity
-            android:name=".ManHinh.LoginActivity"
+            android:name=".ManHinh.Trang_Chu"
             android:exported="false" />
         <activity
             android:name=".ManHinh.SignUpActivity"
             android:exported="true"></activity>
         <activity
-            android:name=".ManHinh.Trang_Chu"
+            android:name=".ManHinh.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -79,7 +79,8 @@ public class LoginActivity extends AppCompatActivity {
                     if(!user.equals(tmpUser) && !pass.equals(tmpPass)){
                         Toast.makeText(LoginActivity.this, "Sai thông tin đăng nhập", Toast.LENGTH_LONG).show();
                     }else {
-
+                        Intent intent=new Intent(LoginActivity.this, Trang_Chu.class);
+                        startActivity(intent);
                         // Phần này chuyển đến màn hình chính
 
 //                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
