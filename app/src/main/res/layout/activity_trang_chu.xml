@@ -8,6 +8,7 @@
     android:padding="10dp"
     android:orientation="vertical">
     <LinearLayout
+        android:id="@+id/nj"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center">
@@ -47,7 +48,7 @@
         android:textSize="17dp"
         android:textStyle="bold"/>
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcvChucNang"
+        android:id="@+id/rcvCN"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>
