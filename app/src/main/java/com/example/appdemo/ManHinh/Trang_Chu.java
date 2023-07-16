@@ -26,18 +26,23 @@ public class Trang_Chu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_trang_chu);
         rcvCN=findViewById(R.id.rcvCN);
         btnAccount = findViewById(R.id.btnAccount);
+        btnThongBao = findViewById(R.id.btnThongBao);
+
         list= new ArrayList<>();
         list.add(new ChucNang(R.drawable.icon_thongtin,"Thông tin","Thông tin cá nhân"));
         list.add(new ChucNang(R.drawable.baseline_calendar_today_24,"Lịch họp","Thông tin lịch họp"));
         list.add(new ChucNang(R.drawable.baseline_calendar_month_24,"Chấm công","Bảng chấm công"));
         list.add(new ChucNang(R.drawable.baseline_query_builder_24,"Lịch sử nghỉ","Lịch sử nghỉ,đi muộn"));
+
         adapter=new ChucNangAdapter(list,this);
         rcvCN.setAdapter(adapter);
         GridLayoutManager layoutManager=new GridLayoutManager(this,2);
         rcvCN.setLayoutManager(layoutManager);
+
         btnAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
