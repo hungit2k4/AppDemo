@@ -13,11 +13,17 @@
         android:theme="@style/Theme.AppDemo"
         tools:targetApi="31">
         <activity
+            android:name=".ThongBao"
+            android:exported="false" />
+        <activity
+            android:name=".ManHinh.Infor_account"
+            android:exported="false" />
+        <activity
             android:name=".ManHinh.Trang_Chu"
             android:exported="false" />
         <activity
             android:name=".ManHinh.SignUpActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ManHinh.LoginActivity"
             android:exported="true">
