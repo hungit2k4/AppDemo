@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="28dp"
+    tools:context=".ManHinh.InputCodeActivity">
+
+    <ImageButton
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="37dp"
+        android:background="@drawable/shape_layout"
+        android:src="@drawable/baseline_arrow_back_ios_24" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="105dp"
+        android:text="Vefitication Code"
+        android:textColor="@color/black"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Please type the vefitication code sent to \nprelookstudio@gmail.com"
+        android:textColor="@color/lightgray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="31dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edtNumOne"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:background="@drawable/shape_edt_input_code"
+            android:gravity="center"
+            android:text="5"
+            android:inputType="number"
+            android:textColor="@color/orange"
+            android:textSize="27sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtNumTwo"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/shape_edt_input_code"
+            android:gravity="center"
+            android:text="5"
+            android:inputType="number"
+            android:textColor="@color/orange"
+            android:textSize="27sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtNumThree"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/shape_edt_input_code"
+            android:gravity="center"
+            android:text="5"
+            android:inputType="number"
+            android:textColor="@color/orange"
+            android:textSize="27sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtNumFour"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/shape_edt_input_code"
+            android:gravity="center"
+            android:text="5"
+            android:inputType="number"
+            android:textColor="@color/orange"
+            android:textSize="27sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I don't recevie a code!" />
+
+        <Button
+            android:id="@+id/btnResendCode"
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please resend"
+            android:textColor="@color/orange" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="248dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/orange"
+        android:text="OK" />
+
+</LinearLayout>

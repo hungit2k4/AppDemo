@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:text="Anh"
                 android:textSize="18dp"
-                android:checked="true"/>
+                />
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -99,6 +99,16 @@
             android:layout_marginTop="10dp"
             android:padding="10dp" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnEditInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chỉnh sửa"
+        android:backgroundTint="#00BCD4"
+        app:cornerRadius="10dp"
+        android:layout_marginTop="20dp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
