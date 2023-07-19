@@ -1,4 +1,4 @@
-package com.example.appdemo;
+package com.example.appdemo.fragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.example.appdemo.Apdapter.ChucNangAdapter;
 import com.example.appdemo.Model.ChucNang;
+import com.example.appdemo.R;
 
 import java.util.ArrayList;
 

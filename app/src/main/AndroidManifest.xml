@@ -13,7 +13,7 @@
         android:theme="@style/Theme.AppDemo"
         tools:targetApi="31">
         <activity
-            android:name=".FragmentHome"
+            android:name=".fragment.FragmentHome"
             android:exported="false" />
         <activity
             android:name=".ThongBao"
@@ -25,7 +25,7 @@
             android:name=".ManHinh.Trang_Chu"
             android:exported="false" />
         <activity
-            android:name=".ManHinh.SignUpActivity"
+            android:name=".ManHinh.ForgotPass"
             android:exported="true" />
         <activity
             android:name=".ManHinh.LoginActivity"

@@ -3,8 +3,6 @@ package com.example.appdemo.ManHinh;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,16 +10,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.appdemo.Apdapter.ChucNangAdapter;
-import com.example.appdemo.FragmentHome;
-import com.example.appdemo.Model.ChucNang;
+import com.example.appdemo.fragment.FragmentHome;
 import com.example.appdemo.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.ArrayList;
 
 public class Trang_Chu extends AppCompatActivity {
     TextView btnAccount,btnThongBao;

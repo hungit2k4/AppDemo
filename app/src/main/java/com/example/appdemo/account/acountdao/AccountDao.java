@@ -36,7 +36,8 @@ public class AccountDao {
                 do{
                     list.add(new Account(cursor.getInt(0),
                             cursor.getString(1),
-                            cursor.getString(2)));
+                            cursor.getString(2),
+                            cursor.getString(3)));
                 }while(cursor.moveToNext());
             }
         }catch (Exception e){

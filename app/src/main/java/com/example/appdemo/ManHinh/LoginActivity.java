@@ -73,17 +73,22 @@ public class LoginActivity extends AppCompatActivity {
                     }else {
                         Intent intent=new Intent(LoginActivity.this, Trang_Chu.class);
                         startActivity(intent);
-                        // Phần này chuyển đến màn hình chính
-
-//                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                        startActivity(intent);
-//                        finish();
+                        finish();
                         Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_LONG).show();
                     }
 
 
                 }
 
+            }
+        });
+
+        btnForgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i_gotoForgotPass = new Intent(LoginActivity.this, ForgotPass.class);
+                startActivity(i_gotoForgotPass);
+                finish();
             }
         });
 
