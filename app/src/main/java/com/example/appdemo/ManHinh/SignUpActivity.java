@@ -22,7 +22,7 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_forgot_password);
         edtUserSignUp = findViewById(R.id.edtUserSignUp);
         edtPassSignUp = findViewById(R.id.edtPassSignUp);
         btnSignUp = findViewById(R.id.btnSignUp);

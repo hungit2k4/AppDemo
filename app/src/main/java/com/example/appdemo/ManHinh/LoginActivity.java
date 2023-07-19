@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText edtUserLogin, edtPassLogin;
-    private Button btnLogin, btnForgotPass, btnGoToSignUp;
+    private Button btnLogin, btnForgotPass;
     private ArrayList<Account> list;
     private AccountDao accountDao;
 
@@ -34,17 +34,9 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin = findViewById(R.id.btnLogin);
         btnForgotPass = findViewById(R.id.btnForgotPass);
-        btnGoToSignUp = findViewById(R.id.btnGoToSignUp);
 
         accountDao = new AccountDao(LoginActivity.this);
         list = accountDao.getListAcount();
-        btnGoToSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i_goToSignUp = new Intent(LoginActivity.this, SignUpActivity.class);
-                startActivity(i_goToSignUp);
-            }
-        });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
