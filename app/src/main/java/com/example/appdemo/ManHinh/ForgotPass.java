@@ -52,7 +52,7 @@ public class ForgotPass extends AppCompatActivity {
                         if(Integer.valueOf(id) == listAccount.get(i).getId()){
                             tmpId = listAccount.get(i).getId();
                         }
-                        if(phoneNumber.equals(listAccount.get(i).get))
+
                     }
 
                     if(id.equals(String.valueOf(tmpId))){

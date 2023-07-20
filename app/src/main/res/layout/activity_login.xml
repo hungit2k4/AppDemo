@@ -28,7 +28,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/username"
+        android:text="User name:"
         android:textColor="@color/black"
         android:textSize="20sp"/>
 
@@ -36,7 +36,7 @@
         android:id="@+id/edtUserLogin"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="@string/input_user"
+        android:hint="Nhập Username"
         android:background="@drawable/shape_edt"
         android:padding="10dp"
         android:layout_marginTop="5dp"
@@ -45,7 +45,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/password"
+        android:text="Password:"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:layout_marginTop="20dp"/>
@@ -54,7 +54,7 @@
         android:id="@+id/edtPassLogin"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="@string/input_pass"
+        android:hint="Nhập pass"
         android:background="@drawable/shape_edt"
         android:padding="10dp"
         android:layout_marginTop="5dp"
