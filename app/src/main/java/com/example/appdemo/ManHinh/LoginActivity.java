@@ -76,10 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                         finish();
                         Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_LONG).show();
                     }
-
-
                 }
-
             }
         });
 

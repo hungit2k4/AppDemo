@@ -1,5 +1,6 @@
 package com.example.appdemo.ManHinh;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -35,6 +36,9 @@ public class ForgotPass extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                accountDao = new AccountDao(ForgotPass.this);
+                listAccount = accountDao.getListAcount();
+
                 String id = edtStaffId.getText().toString();
                 String phoneNumber = edtPhoneNumber.getText().toString();
 
@@ -45,19 +49,21 @@ public class ForgotPass extends AppCompatActivity {
                     edtPhoneNumber.setError("Chưa nhập số điện thoại");
                     edtPhoneNumber.requestFocus();
                 }else {
-                    int tmpId = 0;
-                    String tmpPhone;
-                    for (int i = 1; i < listAccount.size(); i++){
+                    int tmpId = -1;
+
+                    for (int i = 0; i < listAccount.size(); i++){
+
+                        tmpId = listAccount.get(i).getId();
 
                         if(Integer.valueOf(id) == listAccount.get(i).getId()){
-                            tmpId = listAccount.get(i).getId();
                         }
-
                     }
 
                     if(id.equals(String.valueOf(tmpId))){
 
-
+                        Intent i_gotoInputCode = new Intent(ForgotPass.this, InputCodeActivity.class);
+                        startActivity(i_gotoInputCode);
+                        finish();
 
                     }else {
                         edtStaffId.setError("Mã id không đúng");
@@ -65,9 +71,6 @@ public class ForgotPass extends AppCompatActivity {
                     }
 
                 }
-
-
-
             }
         });
 

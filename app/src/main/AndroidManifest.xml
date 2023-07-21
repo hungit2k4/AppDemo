@@ -13,6 +13,9 @@
         android:theme="@style/Theme.AppDemo"
         tools:targetApi="31">
         <activity
+            android:name=".ManHinh.CreateNewPassword"
+            android:exported="false" />
+        <activity
             android:name=".fragment.FragmentHome"
             android:exported="false" />
         <activity
@@ -23,9 +26,12 @@
             android:exported="false" />
         <activity
             android:name=".ManHinh.Trang_Chu"
-            android:exported="false" />
+            android:exported="true"></activity>
         <activity
             android:name=".ManHinh.ForgotPass"
+            android:exported="true" />
+        <activity
+            android:name=".ManHinh.InputCodeActivity"
             android:exported="true" />
         <activity
             android:name=".ManHinh.LoginActivity"

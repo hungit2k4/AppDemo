@@ -5,17 +5,16 @@ public class Account {
     private int id;
     private String username;
     private String password;
-    private String phoneNumber;
 
 
     public Account() {
     }
 
-    public Account(int id, String username, String password, String phoneNumber) {
+    public Account(int id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.phoneNumber = phoneNumber;
+
     }
 
     public int getId() {
@@ -42,11 +41,5 @@ public class Account {
         this.password = password;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 }

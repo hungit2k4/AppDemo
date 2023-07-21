@@ -20,7 +20,8 @@ public class AcDphelper extends SQLiteOpenHelper {
         db.execSQL(sql);
 
         String dataAc = "INSERT INTO ACCOUNT(Username, Password) VALUES" +
-                "('admin', 'admin123')";
+                "('admin', 'admin123')," +
+                "('admin2', 'admin123')";
         db.execSQL(dataAc);
 
     }
