@@ -62,6 +62,7 @@ public class ForgotPass extends AppCompatActivity {
                     if(id.equals(String.valueOf(tmpId))){
 
                         Intent i_gotoInputCode = new Intent(ForgotPass.this, InputCodeActivity.class);
+                        i_gotoInputCode.putExtra("id", Integer.valueOf(id));
                         startActivity(i_gotoInputCode);
                         finish();
 

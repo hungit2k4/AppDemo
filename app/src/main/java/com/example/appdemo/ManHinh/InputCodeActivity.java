@@ -1,5 +1,6 @@
 package com.example.appdemo.ManHinh;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +29,10 @@ public class InputCodeActivity extends AppCompatActivity {
         btnSubmit = findViewById(R.id.btnSubmit);
         btnResendCode = findViewById(R.id.btnResendCode);
 
+        Intent intent = getIntent();
+        int id = intent.getIntExtra("id", -1);
+
+
         randomCode();
 
         btnResendCode.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +44,11 @@ public class InputCodeActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Intent i_gotoCreateNewPass = new Intent(InputCodeActivity.this, CreateNewPassword.class);
+                i_gotoCreateNewPass.putExtra("id", id);
+                startActivity(i_gotoCreateNewPass);
+
                 Toast.makeText(InputCodeActivity.this, "Đã nhập code thành công", Toast.LENGTH_LONG).show();
             }
         });
