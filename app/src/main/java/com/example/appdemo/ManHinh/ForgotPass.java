@@ -20,38 +20,21 @@ public class ForgotPass extends AppCompatActivity {
 
     private EditText edtStaffId, edtPhoneNumber;
     private Button btnSend;
-    private ArrayList<Account> listAccount;
+    private ArrayList<Account> listAccount = new ArrayList<>();
     private AccountDao accountDao;
-
+    private   UpDataToSever upDataToSever = new UpDataToSever(ForgotPass.this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
-
         edtStaffId = findViewById(R.id.edtStaffId);
         edtPhoneNumber = findViewById(R.id.edtPhoneNumber);
-
         btnSend = findViewById(R.id.btnSend);
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                accountDao = new AccountDao(ForgotPass.this);
-                listAccount = accountDao.getListAcount();
-                UpDataToSever upDataToSever = new UpDataToSever(ForgotPass.this);
-                upDataToSever.getAccountToSever(ForgotPass.this, new UpDataToSever.OnDataLoadedListener() {
-                    @Override
-                    public void onDataLoaded(ArrayList<Account> listAcc) {
-                        listAccount=listAcc;
-                        Toast.makeText(ForgotPass.this,"ok",Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onDataLoadFailed(String errorMessage) {
-
-                    }
-                });
                 String id = edtStaffId.getText().toString();
                 String phoneNumber = edtPhoneNumber.getText().toString();
 
@@ -90,5 +73,20 @@ public class ForgotPass extends AppCompatActivity {
 
 
 
+    }
+    private void loadData(){
+
+        upDataToSever.getAccountToSever(this, new UpDataToSever.OnDataLoadedListener() {
+            @Override
+            public void onDataLoaded(ArrayList<Account> listAcc) {
+
+                listAccount =listAcc;
+            }
+
+            @Override
+            public void onDataLoadFailed(String errorMessage) {
+
+            }
+        });
     }
 }

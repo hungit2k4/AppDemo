@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.appdemo.R;
+import com.example.appdemo.UpDataToSever;
 import com.example.appdemo.account.Account;
 import com.example.appdemo.account.acountdao.AccountDao;
 
@@ -19,10 +20,10 @@ public class CreateNewPassword extends AppCompatActivity {
 
     private EditText edtNewPass, edtConfirmPass;
     private Button btnOk;
-    private ArrayList<Account> listAccount;
-    private AccountDao accountDao;
+    private ArrayList<Account>  listAccount = new ArrayList<>();
+    private AccountDao    accountDao = new AccountDao(this);
 
-
+    private UpDataToSever upDataToSever =new UpDataToSever(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +35,6 @@ public class CreateNewPassword extends AppCompatActivity {
 
         Intent intent = getIntent();
         int id = intent.getIntExtra("id", -1);
-
-
-        accountDao = new AccountDao(this);
-        listAccount = new ArrayList<>();
-
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,13 +57,12 @@ public class CreateNewPassword extends AppCompatActivity {
 
                     listAccount = accountDao.getListAcount();
 
-                    for (Account account: listAccount
-                         ) {
+                    for (Account account: listAccount) {
                         if(id == account.getId()){
                             account.setId(id);
                             account.setPassword(newPass);
                             accountDao.updateAccount(account);
-
+                            upDataToSever.upAccount();
                             Intent i_backToLogin = new Intent(CreateNewPassword.this, LoginActivity.class);
                             startActivity(i_backToLogin);
                             finish();
