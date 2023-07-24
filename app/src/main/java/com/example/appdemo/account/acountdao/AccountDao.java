@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class AccountDao {
 
     private final AcDphelper acDphelper;
-    private SQLiteDatabase database;
+   private SQLiteDatabase database;
 
     public AccountDao(Context context) {
         acDphelper = new AcDphelper(context);
@@ -77,6 +77,9 @@ public class AccountDao {
 
         return check;
     }
-
+    public void updateDatabase(){
+        SQLiteDatabase db=acDphelper.getWritableDatabase();
+       acDphelper.updateAccount(db);
+    }
 
 }

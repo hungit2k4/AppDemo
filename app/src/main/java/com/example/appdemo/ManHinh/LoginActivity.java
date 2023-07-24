@@ -7,12 +7,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.appdemo.R;
+import com.example.appdemo.UpDataToSever;
 import com.example.appdemo.account.Account;
 import com.example.appdemo.account.acountdao.AccountDao;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -20,10 +27,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText edtUserLogin, edtPassLogin;
     private Button btnLogin, btnForgotPass;
-    private ArrayList<Account> list;
+    public ArrayList<Account> list;
     private AccountDao accountDao;
-
-
+    private UpDataToSever upDataToSever= new UpDataToSever(LoginActivity.this);
+    DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child("account");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +43,33 @@ public class LoginActivity extends AppCompatActivity {
         btnForgotPass = findViewById(R.id.btnForgotPass);
 
         accountDao = new AccountDao(LoginActivity.this);
-        list = accountDao.getListAcount();
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
+                loadData();
+                Toast.makeText(LoginActivity.this,"Dữ liệu vừa được cập nhật!",Toast.LENGTH_LONG).show();
+            }
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
+                // Không cần xử lý
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                // Không cần xử lý
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String s) {
+                // Không cần xử lý
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Không cần xử lý
+            }
+        });
+
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,12 +89,11 @@ public class LoginActivity extends AppCompatActivity {
                     String tmpUser = null;
                     String tmpPass = null;
 
-                    for(int i = 0; i < list.size(); i++){
-
-                        if(user.equals(list.get(i).getUsername())){
-                            if(pass.equals(list.get(i).getPassword())){
-                                tmpUser = list.get(i).getUsername();
-                                tmpPass = list.get(i).getPassword();
+                    for(Account x:list){
+                        if(user.equals(x.getUsername())){
+                            if(pass.equals(x.getPassword())){
+                                tmpUser = x.getUsername();
+                                tmpPass = x.getPassword();
                                 break;
                             }
                         }
@@ -88,8 +120,20 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    private void loadData(){
 
+        upDataToSever.getAccountToSever(this, new UpDataToSever.OnDataLoadedListener() {
+            @Override
+            public void onDataLoaded(ArrayList<Account> listAcc) {
 
+                list =listAcc;
+            }
 
+            @Override
+            public void onDataLoadFailed(String errorMessage) {
+
+            }
+        });
     }
 }

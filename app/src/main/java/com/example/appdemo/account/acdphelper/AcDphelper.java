@@ -18,22 +18,18 @@ public class AcDphelper extends SQLiteOpenHelper {
                 "Username TEXT," +
                 "Password TEXT)";
         db.execSQL(sql);
-
-        String dataAc = "INSERT INTO ACCOUNT(Username, Password) VALUES" +
-                "('admin', 'admin123')," +
-                "('admin2', 'admin123')";
-        db.execSQL(dataAc);
-
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-
-        if(i != i1){
-
             db.execSQL("DROP TABLE IF EXISTS ACCOUNT");
             onCreate(db);
-
-        }
+    }
+    public void updateAccount(SQLiteDatabase db){
+        db.execSQL("drop table if exists account");
+        String sql = "CREATE TABLE ACCOUNT( Id integer PRIMARY KEY AUTOINCREMENT," +
+                "Username TEXT," +
+                "Password TEXT)";
+        db.execSQL(sql);
     }
 }
