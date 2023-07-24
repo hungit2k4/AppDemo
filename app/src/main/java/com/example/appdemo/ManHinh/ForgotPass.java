@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appdemo.R;
+import com.example.appdemo.UpDataToSever;
 import com.example.appdemo.account.Account;
 import com.example.appdemo.account.acountdao.AccountDao;
 
@@ -38,7 +39,19 @@ public class ForgotPass extends AppCompatActivity {
 
                 accountDao = new AccountDao(ForgotPass.this);
                 listAccount = accountDao.getListAcount();
+                UpDataToSever upDataToSever = new UpDataToSever(ForgotPass.this);
+                upDataToSever.getAccountToSever(ForgotPass.this, new UpDataToSever.OnDataLoadedListener() {
+                    @Override
+                    public void onDataLoaded(ArrayList<Account> listAcc) {
+                        listAccount=listAcc;
+                        Toast.makeText(ForgotPass.this,"ok",Toast.LENGTH_SHORT).show();
+                    }
 
+                    @Override
+                    public void onDataLoadFailed(String errorMessage) {
+
+                    }
+                });
                 String id = edtStaffId.getText().toString();
                 String phoneNumber = edtPhoneNumber.getText().toString();
 
