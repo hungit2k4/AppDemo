@@ -8,6 +8,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,30 +52,6 @@ public class InputCodeActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int id = intent.getIntExtra("id", -1);
 
-
-        sendNotification(otp1, otp2, otp3, otp4);
-
-        btnResendCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendNotification(otp1, otp2, otp3, otp4);
-            }
-        });
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent i_gotoCreateNewPass = new Intent(InputCodeActivity.this, CreateNewPassword.class);
-                i_gotoCreateNewPass.putExtra("id", id);
-                startActivity(i_gotoCreateNewPass);
-
-                Toast.makeText(InputCodeActivity.this, "Đã nhập code thành công", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    public void sendNotification(String otp1, String otp2, String otp3, String otp4) {
-
         Long rdNumOne = Math.round(Math.random() * 9);
         Long rdNumTwo = Math.round(Math.random() * 9);
         Long rdNumThree = Math.round(Math.random() * 9);
@@ -83,6 +61,77 @@ public class InputCodeActivity extends AppCompatActivity {
         otp2 = String.valueOf(rdNumTwo);
         otp3 = String.valueOf(rdNumThree);
         otp4 = String.valueOf(rdNumFour);
+
+        // di chuyển sang ô nhập kế tiếp
+        edtNumOne.addTextChangedListener(new OtpTextWatcher(edtNumOne, edtNumTwo));
+        edtNumTwo.addTextChangedListener(new OtpTextWatcher(edtNumTwo, edtNumThree));
+        edtNumThree.addTextChangedListener(new OtpTextWatcher(edtNumThree, edtNumFour));
+        edtNumFour.addTextChangedListener(new OtpTextWatcher(edtNumFour, null));
+
+        sendNotification(otp1, otp2, otp3, otp4);
+
+        btnResendCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Long rdNumOne = Math.round(Math.random() * 9);
+                Long rdNumTwo = Math.round(Math.random() * 9);
+                Long rdNumThree = Math.round(Math.random() * 9);
+                Long rdNumFour = Math.round(Math.random() * 9);
+
+                otp1 = String.valueOf(rdNumOne);
+                otp2 = String.valueOf(rdNumTwo);
+                otp3 = String.valueOf(rdNumThree);
+                otp4 = String.valueOf(rdNumFour);
+                sendNotification(otp1, otp2, otp3, otp4);
+            }
+        });
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String inPutOtp1 = edtNumOne.getText().toString();
+                String inPutOtp2 = edtNumTwo.getText().toString();
+                String inPutOtp3 = edtNumThree.getText().toString();
+                String inPutOtp4 = edtNumFour.getText().toString();
+
+                Boolean check1 = inPutOtp1.equals(otp1);
+                Boolean check2 = inPutOtp2.equals(otp2);
+                Boolean check3 = inPutOtp3.equals(otp3);
+                Boolean check4 = inPutOtp4.equals(otp4);
+
+                if (inPutOtp1.isEmpty()) {
+                    edtNumOne.setError("Trống");
+                    edtNumOne.requestFocus();
+                } else if (inPutOtp2.isEmpty()) {
+                    edtNumTwo.setError("Trống");
+                    edtNumTwo.requestFocus();
+                } else if (inPutOtp3.isEmpty()) {
+                    edtNumThree.setError("Trống");
+                    edtNumThree.requestFocus();
+                } else if (inPutOtp4.isEmpty()) {
+                    edtNumFour.setError("Trống");
+                    edtNumFour.requestFocus();
+                } else {
+
+                    if (check1 && check2 && check3 && check4) {
+                        Intent i_gotoCreateNewPass = new Intent(InputCodeActivity.this, CreateNewPassword.class);
+                        i_gotoCreateNewPass.putExtra("id", id);
+                        startActivity(i_gotoCreateNewPass);
+
+                        Toast.makeText(InputCodeActivity.this, "Đã nhập code thành công", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(InputCodeActivity.this, "Mã OPT không đúng", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                }
+
+
+            }
+        });
+    }
+
+    public void sendNotification(String otp1, String otp2, String otp3, String otp4) {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, ConfigNotification.CHANNEL_ID)
                 .setSmallIcon(R.drawable.baseline_notifications_24)
@@ -104,6 +153,36 @@ public class InputCodeActivity extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                     sendNotification(otp1, otp2, otp3, otp4);
+                }
+            }
+        }
+    }
+
+    private class OtpTextWatcher implements TextWatcher {
+
+        private EditText currentEditText;
+        private EditText nextEditText;
+
+        public OtpTextWatcher(EditText currentEditText, EditText nextEditText) {
+            this.currentEditText = currentEditText;
+            this.nextEditText = nextEditText;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            String otp = editable.toString().trim();
+            if (otp.length() == 1) {
+                // Nếu đã nhập một số, di chuyển tới ô EditText tiếp theo (nếu có)
+                if (nextEditText != null) {
+                    nextEditText.requestFocus();
                 }
             }
         }
