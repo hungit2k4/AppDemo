@@ -5,14 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appdemo.R;
-import com.example.appdemo.UpDataToSever;
-import com.example.appdemo.account.Account;
-import com.example.appdemo.account.acountdao.AccountDao;
+import com.example.appdemo.data.model.Account;
+import com.example.appdemo.data.acountdao.AccountDao;
 
 import java.util.ArrayList;
 

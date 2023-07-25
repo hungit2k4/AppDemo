@@ -1,4 +1,4 @@
-package com.example.appdemo.account;
+package com.example.appdemo.data.model;
 
 public class Account {
 

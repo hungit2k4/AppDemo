@@ -1,4 +1,4 @@
-package com.example.appdemo.account.acountdao;
+package com.example.appdemo.data.acountdao;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,8 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.example.appdemo.account.Account;
-import com.example.appdemo.account.acdphelper.AcDphelper;
+import com.example.appdemo.data.model.Account;
+import com.example.appdemo.data.acdphelper.AcDphelper;
 
 import java.util.ArrayList;
 
