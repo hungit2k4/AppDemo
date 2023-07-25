@@ -22,7 +22,6 @@ public class ForgotPass extends AppCompatActivity {
     private Button btnSend;
     private ArrayList<Account> listAccount = new ArrayList<>();
     private AccountDao accountDao;
-    private   UpDataToSever upDataToSever = new UpDataToSever(ForgotPass.this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +44,8 @@ public class ForgotPass extends AppCompatActivity {
                     edtPhoneNumber.setError("Chưa nhập số điện thoại");
                     edtPhoneNumber.requestFocus();
                 }else {
+                    accountDao = new AccountDao(ForgotPass.this);
+                    listAccount=accountDao.getListAcount();
                     int tmpId = -1;
 
                     for (int i = 0; i < listAccount.size(); i++){
@@ -73,20 +74,5 @@ public class ForgotPass extends AppCompatActivity {
 
 
 
-    }
-    private void loadData(){
-
-        upDataToSever.getAccountToSever(this, new UpDataToSever.OnDataLoadedListener() {
-            @Override
-            public void onDataLoaded(ArrayList<Account> listAcc) {
-
-                listAccount =listAcc;
-            }
-
-            @Override
-            public void onDataLoadFailed(String errorMessage) {
-
-            }
-        });
     }
 }

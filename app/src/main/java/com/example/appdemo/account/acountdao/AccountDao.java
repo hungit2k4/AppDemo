@@ -13,14 +13,12 @@ import java.util.ArrayList;
 
 public class AccountDao {
 
-    private final AcDphelper acDphelper;
+    private  AcDphelper acDphelper;
    private SQLiteDatabase database;
 
-    public AccountDao(Context context) {
-        acDphelper = new AcDphelper(context);
-        database = acDphelper.getWritableDatabase();
+    public  AccountDao(Context c){
+        acDphelper = new AcDphelper(c);
     }
-
     public ArrayList<Account> getListAcount() {
 
         ArrayList<Account> list = new ArrayList<>();

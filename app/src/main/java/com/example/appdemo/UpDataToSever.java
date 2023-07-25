@@ -23,23 +23,25 @@ import java.util.Map;
 import java.util.Objects;
 
 public class UpDataToSever {
-    private Context c;
-
-    public UpDataToSever(Context c) {
-        this.c = c;
-    }
 
     private ArrayList<Account> listAccFromDatabase;
     private ArrayList<Account> listAcc;
     private Boolean check=false;
-    private AccountDao accountDao = new AccountDao(c);
+    private AccountDao accountDao ;
 
-    public void upAccount() {
+    public void upAccount(Context c) {
+        accountDao = new AccountDao(c);
         listAccFromDatabase = accountDao.getListAcount();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child("account").setValue(listAccFromDatabase, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                if (error == null) {
+
+                } else {
+                    // Xử lý lỗi nếu có khi gửi dữ liệu
+                    Log.e(TAG, "Lỗi khi gửi dữ liệu lên Firebase: " + error.getMessage());
+                }
             }
         });
     }
@@ -61,7 +63,7 @@ public class UpDataToSever {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // Dữ liệu đã thay đổi, xử lý tại đây
                 // dataSnapshot chứa dữ liệu mới từ "data"
-                listAcc = new ArrayList<>();
+              listAcc = new ArrayList<>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                      Account account = snapshot.getValue(Account.class);
                      if (account != null) {
@@ -70,16 +72,24 @@ public class UpDataToSever {
                 }
                 // Gọi onDataLoadedListener để truyền danh sách người dùng về Activity hoặc Fragment
                  onDataLoadedListener.onDataLoaded(listAcc);
+                accountDao= new AccountDao(c);
+                listAccFromDatabase =accountDao.getListAcount();
+                if (listAccFromDatabase.size()<=0)
+                    check=true;
                 for(Account x:listAcc){
                     if(check){
+                        accountDao.updateDatabase();
                         for (Account y:listAcc){
                                 accountDao.addAccount(y);
                         }
+                        check=false;
+                        break;
                     }
                     for (Account z:listAccFromDatabase){
                         if (!x.getUsername().equals(z.getUsername())||
                                 x.getUsername().equals(z.getUsername())&&!x.getPassword().equals(z.getPassword())){
                             check=true;
+                            break;
                         }
                     }
                 }

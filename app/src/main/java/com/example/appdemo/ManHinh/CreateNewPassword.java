@@ -21,9 +21,9 @@ public class CreateNewPassword extends AppCompatActivity {
     private EditText edtNewPass, edtConfirmPass;
     private Button btnOk;
     private ArrayList<Account>  listAccount = new ArrayList<>();
-    private AccountDao    accountDao = new AccountDao(this);
+    private AccountDao accountDao ;
 
-    private UpDataToSever upDataToSever =new UpDataToSever(this);
+    private UpDataToSever upDataToSever =new UpDataToSever();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +54,7 @@ public class CreateNewPassword extends AppCompatActivity {
                     edtConfirmPass.setError("Mật khẩu không trùng khớp");
                     edtConfirmPass.requestFocus();
                 }else {
-
+                        accountDao=new AccountDao(CreateNewPassword.this);
                     listAccount = accountDao.getListAcount();
 
                     for (Account account: listAccount) {
@@ -62,7 +62,7 @@ public class CreateNewPassword extends AppCompatActivity {
                             account.setId(id);
                             account.setPassword(newPass);
                             accountDao.updateAccount(account);
-                            upDataToSever.upAccount();
+                            upDataToSever.upAccount(CreateNewPassword.this);
                             Intent i_backToLogin = new Intent(CreateNewPassword.this, LoginActivity.class);
                             startActivity(i_backToLogin);
                             finish();

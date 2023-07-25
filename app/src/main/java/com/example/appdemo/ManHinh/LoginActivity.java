@@ -20,6 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -27,10 +28,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText edtUserLogin, edtPassLogin;
     private Button btnLogin, btnForgotPass;
-    public ArrayList<Account> list;
+    public ArrayList<Account> list= new ArrayList<>();
     private AccountDao accountDao;
-    private UpDataToSever upDataToSever= new UpDataToSever(LoginActivity.this);
-    DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child("account");
+    private UpDataToSever upDataToSever;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,40 +42,21 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin = findViewById(R.id.btnLogin);
         btnForgotPass = findViewById(R.id.btnForgotPass);
-
-        accountDao = new AccountDao(LoginActivity.this);
-        databaseReference.addChildEventListener(new ChildEventListener() {
+        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 loadData();
-                Toast.makeText(LoginActivity.this,"Dữ liệu vừa được cập nhật!",Toast.LENGTH_LONG).show();
-            }
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
-                // Không cần xử lý
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                // Không cần xử lý
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String s) {
-                // Không cần xử lý
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Không cần xử lý
+                // Xử lý lỗi nếu có
             }
         });
-
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+               btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String user = edtUserLogin.getText().toString();
                 String pass = edtPassLogin.getText().toString();
 
@@ -120,14 +102,18 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
+
+
     }
     private void loadData(){
-
+        upDataToSever= new UpDataToSever();
         upDataToSever.getAccountToSever(this, new UpDataToSever.OnDataLoadedListener() {
             @Override
             public void onDataLoaded(ArrayList<Account> listAcc) {
-
                 list =listAcc;
+                Toast.makeText(LoginActivity.this,"Dữ liệu đã được đồng bộ",Toast.LENGTH_LONG).show();
             }
 
             @Override
