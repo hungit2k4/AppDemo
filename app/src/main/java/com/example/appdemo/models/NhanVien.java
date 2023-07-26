@@ -1,4 +1,4 @@
-package com.example.appdemo.data.model;
+package com.example.appdemo.models;
 
 public class NhanVien {
     private  String maNV,ten, ngaySinh,diaChi,chucVu;

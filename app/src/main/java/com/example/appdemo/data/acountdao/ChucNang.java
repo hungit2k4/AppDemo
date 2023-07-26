@@ -1,4 +1,4 @@
-package com.example.appdemo.Model;
+package com.example.appdemo.data.acountdao;
 
 public class ChucNang {
     private int icon;

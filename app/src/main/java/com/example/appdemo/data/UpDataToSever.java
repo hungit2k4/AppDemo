@@ -9,9 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.appdemo.data.acountdao.NhanVienDao;
-import com.example.appdemo.data.model.Account;
+import com.example.appdemo.models.Account;
 import com.example.appdemo.data.acountdao.AccountDao;
-import com.example.appdemo.data.model.NhanVien;
+import com.example.appdemo.models.NhanVien;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

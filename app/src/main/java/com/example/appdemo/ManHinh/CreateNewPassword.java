@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 import com.example.appdemo.R;
 import com.example.appdemo.data.UpDataToSever;
-import com.example.appdemo.data.model.Account;
+import com.example.appdemo.models.Account;
 import com.example.appdemo.data.acountdao.AccountDao;
 
 import java.util.ArrayList;

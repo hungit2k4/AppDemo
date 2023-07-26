@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.appdemo.data.acdphelper.AcDphelper;
-import com.example.appdemo.data.model.NhanVien;
+import com.example.appdemo.models.NhanVien;
 
 import java.util.ArrayList;
 
