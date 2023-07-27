@@ -29,7 +29,6 @@ public class FragmentHome extends Fragment {
         View view = inflater.inflate(R.layout.activity_fragment_home, null);
 
         rcvCN = view.findViewById(R.id.rcvCN);
-
         list= new ArrayList<>();
         list.add(new ChucNang(R.drawable.icon_thongtin,"Thông tin","Thông tin cá nhân"));
         list.add(new ChucNang(R.drawable.baseline_calendar_today_24,"Lịch họp","Thông tin lịch họp"));
@@ -41,7 +40,6 @@ public class FragmentHome extends Fragment {
         rcvCN.setAdapter(adapter);
         GridLayoutManager layoutManager=new GridLayoutManager(getContext(),2);
         rcvCN.setLayoutManager(layoutManager);
-
         return view;
     }
 }
