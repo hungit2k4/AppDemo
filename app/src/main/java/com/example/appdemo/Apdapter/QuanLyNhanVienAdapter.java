@@ -25,7 +25,10 @@ public class QuanLyNhanVienAdapter extends RecyclerView.Adapter<QuanLyNhanVienHo
     @NonNull
     @Override
     public QuanLyNhanVienHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.nhanvien_item,null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.nhanvien_item,parent,false);
+        RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) view.getLayoutParams();
+        layoutParams.setMargins(0,10,0,10);
+        view.setLayoutParams(layoutParams);
         return new QuanLyNhanVienHolder(view);
     }
 
