@@ -65,7 +65,6 @@ public class CreateNewPassword extends AppCompatActivity {
                             Intent i_backToLogin = new Intent(CreateNewPassword.this, LoginActivity.class);
                             startActivity(i_backToLogin);
                             finish();
-                           
                             break;
 
                         }

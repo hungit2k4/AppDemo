@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.example.appdemo.fragment.FragmentChat;
 import com.example.appdemo.fragment.FragmentHome;
 import com.example.appdemo.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -53,7 +54,9 @@ public class Trang_Chu extends AppCompatActivity {
                 if(item.getItemId() == R.id.bottom_home){
                     fragmentBottom = new FragmentHome();
                 }
-
+                if (item.getItemId()==R.id.mChat){
+                    fragmentBottom= new FragmentChat();
+                }
                 getSupportFragmentManager().beginTransaction().replace(R.id.frLayout, fragmentBottom).commit();
                 return true;
             }
@@ -75,30 +78,4 @@ public class Trang_Chu extends AppCompatActivity {
         });
     }
 }
-//import java.util.Date;
-//        import java.text.SimpleDateFormat;
-//
-//public class CurrentDateTimeExample {
-//    public static void main(String[] args) {
-//        // Lấy thời gian hiện tại
-//        Date date = new Date();
-//
-//        // Định dạng để lấy thứ, ngày, tháng và năm
-//        SimpleDateFormat sdfDayOfWeek = new SimpleDateFormat("EEEE"); // Lấy thứ trong tuần
-//        SimpleDateFormat sdfDayOfMonth = new SimpleDateFormat("dd"); // Lấy ngày trong tháng
-//        SimpleDateFormat sdfMonth = new SimpleDateFormat("MM"); // Lấy tháng
-//        SimpleDateFormat sdfYear = new SimpleDateFormat("yyyy"); // Lấy năm
-//
-//        // Lấy thông tin về thứ, ngày, tháng và năm
-//        String dayOfWeek = sdfDayOfWeek.format(date);
-//        String dayOfMonth = sdfDayOfMonth.format(date);
-//        String month = sdfMonth.format(date);
-//        String year = sdfYear.format(date);
-//
-//        // In thông tin lên màn hình
-//        System.out.println("Thứ: " + dayOfWeek);
-//        System.out.println("Ngày: " + dayOfMonth);
-//        System.out.println("Tháng: " + month);
-//        System.out.println("Năm: " + year);
-//    }
-//}
+

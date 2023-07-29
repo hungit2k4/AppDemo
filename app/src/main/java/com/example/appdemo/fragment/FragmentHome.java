@@ -26,7 +26,7 @@ public class FragmentHome extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_fragment_home, null);
+            View view = inflater.inflate(R.layout.activity_fragment_home, null);
 
         rcvCN = view.findViewById(R.id.rcvCN);
         list= new ArrayList<>();
