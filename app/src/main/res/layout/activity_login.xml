@@ -40,6 +40,7 @@
         android:background="@drawable/shape_edt"
         android:padding="10dp"
         android:layout_marginTop="5dp"
+        android:inputType="text"
         />
 
     <TextView

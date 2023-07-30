@@ -79,6 +79,8 @@ public class LoginActivity extends AppCompatActivity {
                                         Account account = new Account();
                                         account = snapshot.getValue(Account.class);
 
+                                        String name = account.getFullName();
+
                                         if (pass.equals(account.getPassword())) {
 
                                             Intent i_goToHome = new Intent(LoginActivity.this, Trang_Chu.class);

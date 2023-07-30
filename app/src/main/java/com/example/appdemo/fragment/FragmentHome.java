@@ -31,7 +31,7 @@ public class FragmentHome extends Fragment {
         rcvCN = view.findViewById(R.id.rcvCN);
         list= new ArrayList<>();
         list.add(new ChucNang(1,R.drawable.icon_thongtin,"Thông tin","Thông tin cá nhân"));
-        list.add(new ChucNang(2,R.drawable.baseline_calendar_today_24,"Lịch họp","Thông tin lịch họp"));
+        list.add(new ChucNang(2, R.drawable.baseline_calendar_month_24,"Lịch họp","Thông tin lịch họp"));
         list.add(new ChucNang(3,R.drawable.baseline_calendar_month_24,"Chấm công","Bảng chấm công"));
         list.add(new ChucNang(4,R.drawable.baseline_query_builder_24,"Lịch sử nghỉ","Lịch sử nghỉ,đi muộn"));
         list.add(new ChucNang(5,R.drawable.baseline_switch_account_24, "Cấp tài khoản", "Cấp tài khoản mới"));

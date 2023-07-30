@@ -112,7 +112,7 @@ public class ChucNangAdapter extends RecyclerView.Adapter<ChucNangAdapter.ViewHo
 
                                 Account account = new Account();
                                 account.setId(Integer.parseInt(idNV));
-                                account.setUsername(tenNV);
+                                account.setFullName(tenNV);
                                 account.setUsername(tenDangNhap);
                                 account.setPassword(matKhau);
 

@@ -4,57 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="10dp"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
     tools:context=".ManHinh.Trang_Chu">
 
-    <TextView
-        android:id="@+id/btnAccount"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/rltWelcome"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/baseline_account_circle_24" />
-
-    <TextView
-        android:id="@+id/tvHello"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Xin chào,"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_toRightOf="@+id/btnAccount"/>
-
-    <TextView
-        android:id="@+id/tvDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Thứ 3,15/7/2023"
-        android:layout_toRightOf="@+id/btnAccount"
-        android:layout_below="@+id/tvHello"/>
-
-    <TextView
-        android:id="@+id/btnThongBao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableRight="@drawable/baseline_notifications_24"
-        android:layout_alignParentEnd="true"/>
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        >
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="1000dp"
+            >
+            <ImageView
+                android:id="@+id/imageAvatar"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/baseline_account_80" />
+        </androidx.cardview.widget.CardView>
 
 
-    <TextView
-        android:id="@+id/tvNoitify"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="Workspace của bạn"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        android:layout_below="@+id/tvDate"/>
+        <TextView
+            android:id="@+id/tvHello"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Xin chào,"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@+id/cardView"/>
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thứ 3,15/7/2023"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@+id/cardView"
+            android:layout_below="@+id/tvHello"/>
+
+        <TextView
+            android:id="@+id/btnThongBao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/baseline_notifications_24"
+            android:layout_alignParentEnd="true"/>
+
+
+        <TextView
+            android:id="@+id/tvNoitify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Workspace của bạn"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/tvDate"/>
+    </RelativeLayout>
+
 
     <FrameLayout
         android:id="@+id/frLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tvNoitify"
+        android:layout_below="@+id/rltWelcome"
         android:layout_above="@+id/bottom_navigation"/>
 
 
@@ -63,6 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="10dp"
         android:background="@drawable/shape_bottom_navigation"
         app:menu="@menu/bottom_navigation_menu"
 
