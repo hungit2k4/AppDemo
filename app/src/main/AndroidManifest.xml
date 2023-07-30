@@ -2,29 +2,29 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:name=".config.ConfigNotification"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:enableOnBackInvokedCallback="true"
         android:theme="@style/Theme.AppDemo"
         tools:targetApi="31">
+        <activity
+            android:name=".ManHinh.Welcome"
+            android:exported="false" />
         <activity
             android:name=".fragment.FragmentChat"
             android:exported="false" />
         <activity
             android:name=".ManHinh.Trang_Chu"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".ManHinh.CreateNewPassword"
             android:exported="false" />
@@ -40,23 +40,21 @@
         <activity
             android:name=".ManHinh.LoginActivity"
             android:exported="true">
-
-        </activity>
-        <activity
-            android:name=".ManHinh.ForgotPass"
-            android:exported="true"></activity>
-        <activity
-            android:name=".ManHinh.InputCodeActivity"
-            android:exported="true"></activity>
-        <activity
-            android:name=".ManHinh.QuanLyNhanVien"
-            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ManHinh.ForgotPass"
+            android:exported="true" />
+        <activity
+            android:name=".ManHinh.InputCodeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ManHinh.QuanLyNhanVien"
+            android:exported="true"></activity>
     </application>
 
 </manifest>
