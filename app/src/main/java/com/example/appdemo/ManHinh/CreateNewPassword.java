@@ -11,7 +11,6 @@ import android.widget.EditText;
 import com.example.appdemo.R;
 import com.example.appdemo.data.UpDataToSever;
 import com.example.appdemo.models.Account;
-import com.example.appdemo.data.acountdao.AccountDao;
 
 import java.util.ArrayList;
 
@@ -20,7 +19,6 @@ public class CreateNewPassword extends AppCompatActivity {
     private EditText edtNewPass, edtConfirmPass;
     private Button btnOk;
     private ArrayList<Account>  listAccount = new ArrayList<>();
-    private AccountDao accountDao ;
 
     private UpDataToSever upDataToSever =new UpDataToSever();
     @Override
@@ -53,14 +51,11 @@ public class CreateNewPassword extends AppCompatActivity {
                     edtConfirmPass.setError("Mật khẩu không trùng khớp");
                     edtConfirmPass.requestFocus();
                 }else {
-                        accountDao=new AccountDao(CreateNewPassword.this);
-                    listAccount = accountDao.getListAcount();
 
                     for (Account account: listAccount) {
                         if(id == account.getId()){
                             account.setId(id);
                             account.setPassword(newPass);
-                            accountDao.updateAccount(account);
                             upDataToSever.upAccount(CreateNewPassword.this);
                             Intent i_backToLogin = new Intent(CreateNewPassword.this, LoginActivity.class);
                             startActivity(i_backToLogin);

@@ -23,7 +23,6 @@ public class QuanLyNhanVien extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quan_ly_nhan_vien);
         rcvNhanVien= findViewById(R.id.rcvNhanvien);
-        nhanVienDao = new NhanVienDao(this);
         list=nhanVienDao.getListNV();
         nhanVienAdapter = new QuanLyNhanVienAdapter(list,this);
         rcvNhanVien.setAdapter(nhanVienAdapter);

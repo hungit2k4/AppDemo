@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 
 import com.example.appdemo.data.acountdao.NhanVienDao;
 import com.example.appdemo.models.Account;
-import com.example.appdemo.data.acountdao.AccountDao;
 import com.example.appdemo.models.NhanVien;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,13 +24,10 @@ public class UpDataToSever {
     private ArrayList<Account> listAccFromDatabase;
     private ArrayList<Account> listAcc;
     private Boolean check=false;
-    private AccountDao accountDao ;
     private ArrayList<NhanVien> listNvFromDatabase;
     private ArrayList<NhanVien> listNV;
     private NhanVienDao nhanVienDao ;
     public void upAccount(Context c) {
-        accountDao = new AccountDao(c);
-        listAccFromDatabase = accountDao.getListAcount();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child("account").setValue(listAccFromDatabase, new DatabaseReference.CompletionListener() {
             @Override
@@ -57,6 +53,7 @@ public class UpDataToSever {
     // Các hàm và biến khác...
     // Hàm lấy dữ liệu từ Firebase
     public void getAccFromSever(Context c, final OnDataLoadedListenerAcc onDataLoadedListener) {
+
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("account");
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -73,15 +70,11 @@ public class UpDataToSever {
                 }
                 // Gọi onDataLoadedListener để truyền danh sách người dùng về Activity hoặc Fragment
                  onDataLoadedListener.onDataLoaded(listAcc);
-                accountDao= new AccountDao(c);
-                listAccFromDatabase =accountDao.getListAcount();
                 if (listAccFromDatabase.size()<=0)
                     check=true;
                 for(Account x:listAcc){
                     if(check){
-                        accountDao.updateDatabase();
                         for (Account y:listAcc){
-                                accountDao.addAccount(y);
                         }
                         check=false;
                         break;
@@ -106,7 +99,6 @@ public class UpDataToSever {
 
     }
     public void upNV(Context c){
-        nhanVienDao = new NhanVienDao(c);
         listNV=nhanVienDao.getListNV();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child("nhanvien").setValue(listNV, new DatabaseReference.CompletionListener() {
@@ -139,13 +131,11 @@ public class UpDataToSever {
                         listNV.add(nhanVien);
                 }
                 onDataLoadedListenerNV.onDataLoaded(listNV);
-                nhanVienDao= new NhanVienDao(c);
                 listNvFromDatabase =nhanVienDao.getListNV();
                 if (listNvFromDatabase.size()<=0)
                     check=true;
                 for(NhanVien x:listNV){
                     if(check){
-                        nhanVienDao.updateDatabase();
                         for (NhanVien y:listNV){
                             nhanVienDao.addNV(y);
                         }

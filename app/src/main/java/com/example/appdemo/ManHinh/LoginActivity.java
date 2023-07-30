@@ -2,6 +2,7 @@ package com.example.appdemo.ManHinh;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +16,6 @@ import com.example.appdemo.R;
 import com.example.appdemo.data.UpDataToSever;
 import com.example.appdemo.data.acountdao.NhanVienDao;
 import com.example.appdemo.models.Account;
-import com.example.appdemo.data.acountdao.AccountDao;
 import com.example.appdemo.models.NhanVien;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,34 +29,21 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText edtUserLogin, edtPassLogin;
     private Button btnLogin, btnForgotPass;
-    public ArrayList<Account> list= new ArrayList<>();
-    private ArrayList<NhanVien> listNV1=new ArrayList<>();
-    private AccountDao accountDao;
-    private NhanVienDao nhanVienDao;
-    private UpDataToSever upDataToSever;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         edtUserLogin = findViewById(R.id.edtUserLogin);
         edtPassLogin = findViewById(R.id.edtPassLogin);
         btnLogin = findViewById(R.id.btnLogin);
         btnForgotPass = findViewById(R.id.btnForgotPass);
-        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                loadData();
 
-            }
+        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("Account");
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Xử lý lỗi nếu có
-            }
-        });
-               btnLogin.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String user = edtUserLogin.getText().toString();
@@ -70,28 +57,75 @@ public class LoginActivity extends AppCompatActivity {
                     edtPassLogin.requestFocus();
                 } else {
 
-                    String tmpUser = null;
-                    String tmpPass = null;
+                    databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String key = null;
 
-                    for(Account x:list){
-                        if(user.equals(x.getUsername())){
-                            if(pass.equals(x.getPassword())){
-                                tmpUser = x.getUsername();
-                                tmpPass = x.getPassword();
-                                break;
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()
+                            ) {
+                                String checkKey = dataSnapshot.getRef().getKey();
+                                if (checkKey.equals(user)) {
+                                    key = checkKey;
+                                    break;
+                                }
                             }
+
+                            if (key != null) {
+                                databaseRef.child(key).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                        Account account = new Account();
+                                        account = snapshot.getValue(Account.class);
+
+                                        if (pass.equals(account.getPassword())) {
+
+                                            Intent i_goToHome = new Intent(LoginActivity.this, Trang_Chu.class);
+
+                                            i_goToHome.putExtra("id", account.getId());
+                                            i_goToHome.putExtra("fullName", account.getFullName());
+                                            i_goToHome.putExtra("user", account.getUsername());
+                                            i_goToHome.putExtra("pass", account.getPassword());
+
+                                            if(account.getUrl_avatar() == null){
+                                                i_goToHome.putExtra("urlAvatar","");
+                                            }else {
+                                                i_goToHome.putExtra("urlAvatar",account.getUrl_avatar());
+                                            }
+                                            if(account.getUrl_background() == null){
+                                                i_goToHome.putExtra("urlBackground","");
+                                            }else {
+                                                i_goToHome.putExtra("urlBackground",account.getUrl_background());
+                                            }
+                                            startActivity(i_goToHome);
+                                            finish();
+                                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_LONG).show();
+                                        } else {
+                                            edtPassLogin.setError("Sai mật khẩu");
+                                            edtPassLogin.requestFocus();
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        Log.e("Database Error", "Error reading data: " + error.getMessage());
+                                    }
+                                });
+                            }else {
+                                edtUserLogin.setError("Tài khoản chưa đăng ký");
+                                edtUserLogin.requestFocus();
+                            }
+
                         }
 
-                    }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    if(!user.equals(tmpUser) && !pass.equals(tmpPass)){
-                        Toast.makeText(LoginActivity.this, "Sai thông tin đăng nhập", Toast.LENGTH_LONG).show();
-                    }else {
-                        Intent intent=new Intent(LoginActivity.this, Trang_Chu.class);
-                        startActivity(intent);
-                        finish();
-                        Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_LONG).show();
-                    }
+                        }
+                    });
+
                 }
             }
         });
@@ -106,34 +140,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-
-
     }
-    private void loadData(){
-        upDataToSever= new UpDataToSever();
-        upDataToSever.getAccFromSever(this, new UpDataToSever.OnDataLoadedListenerAcc() {
-            @Override
-            public void onDataLoaded(ArrayList<Account> listAcc) {
-                list =listAcc;
-                Toast.makeText(LoginActivity.this,"account load fish",Toast.LENGTH_LONG).show();
-            }
 
-            @Override
-            public void onDataLoadFailed(String errorMessage) {
-
-            }
-        });
-        upDataToSever.getNVFromSever(this, new UpDataToSever.OnDataLoadedListenerNV() {
-            @Override
-            public void onDataLoaded(ArrayList<NhanVien> listNV) {
-                listNV1=listNV;
-                Toast.makeText(LoginActivity.this,"Thông tin nhân viên load fish",Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onDataLoadFailed(String errorMessage) {
-
-            }
-        });
-    }
 }
