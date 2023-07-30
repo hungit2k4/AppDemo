@@ -2,9 +2,11 @@ package com.example.appdemo.ManHinh;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -56,14 +58,12 @@ public class ForgotPass extends AppCompatActivity {
                     databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                                 String checkKey = dataSnapshot.getRef().getKey();
                                 if (getUserName.equals(checkKey)) {
                                     key = checkKey;
                                     break;
                                 }
-
                             }
 
                             if (key != null) {
@@ -71,6 +71,7 @@ public class ForgotPass extends AppCompatActivity {
                                 databaseRef.child(key).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                                         Account account = new Account();
                                         account = snapshot.getValue(Account.class);
 
@@ -104,22 +105,24 @@ public class ForgotPass extends AppCompatActivity {
 
                                     }
                                 });
-                            } else {
+                            }else {
                                 edtUserForgot.setError("Tài khoản chưa được cấp");
                                 edtUserForgot.requestFocus();
                             }
-
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
-
+                            Log.e("Error", "Error: " + error.getMessage());
                         }
                     });
 
+
+
                 }
+
+
             }
         });
-
     }
 }

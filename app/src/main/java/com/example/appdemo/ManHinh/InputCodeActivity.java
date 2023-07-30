@@ -51,6 +51,11 @@ public class InputCodeActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         int id = intent.getIntExtra("id", -1);
+        String key = intent.getStringExtra("key");
+        String user = intent.getStringExtra("user");
+        String fullName = intent.getStringExtra("fullName");
+        String url_avatar = intent.getStringExtra("url_avatar");
+        String url_background = intent.getStringExtra("url_background");
 
         Long rdNumOne = Math.round(Math.random() * 9);
         Long rdNumTwo = Math.round(Math.random() * 9);
@@ -116,9 +121,14 @@ public class InputCodeActivity extends AppCompatActivity {
 
                     if (check1 && check2 && check3 && check4) {
                         Intent i_gotoCreateNewPass = new Intent(InputCodeActivity.this, CreateNewPassword.class);
+                        i_gotoCreateNewPass.putExtra("key", key);
+                        i_gotoCreateNewPass.putExtra("user", user);
+                        i_gotoCreateNewPass.putExtra("fullName", fullName);
+                        i_gotoCreateNewPass.putExtra("url_avatar", url_avatar);
+                        i_gotoCreateNewPass.putExtra("url_background", url_background);
                         i_gotoCreateNewPass.putExtra("id", id);
                         startActivity(i_gotoCreateNewPass);
-
+                        finish();
                         Toast.makeText(InputCodeActivity.this, "Đã nhập code thành công", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(InputCodeActivity.this, "Mã OPT không đúng", Toast.LENGTH_LONG).show();

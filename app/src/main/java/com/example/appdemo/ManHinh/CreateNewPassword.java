@@ -11,6 +11,8 @@ import android.widget.EditText;
 import com.example.appdemo.R;
 import com.example.appdemo.data.UpDataToSever;
 import com.example.appdemo.models.Account;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -18,9 +20,7 @@ public class CreateNewPassword extends AppCompatActivity {
 
     private EditText edtNewPass, edtConfirmPass;
     private Button btnOk;
-    private ArrayList<Account>  listAccount = new ArrayList<>();
 
-    private UpDataToSever upDataToSever =new UpDataToSever();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +30,16 @@ public class CreateNewPassword extends AppCompatActivity {
         edtConfirmPass = findViewById(R.id.edtConfirmPass);
         btnOk = findViewById(R.id.btnOk);
 
+        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("Account");
+
         Intent intent = getIntent();
         int id = intent.getIntExtra("id", -1);
+        String key = intent.getStringExtra("key");
+        String user = intent.getStringExtra("user");
+        String fullName = intent.getStringExtra("fullName");
+        String url_avatar = intent.getStringExtra("url_avatar");
+        String url_background = intent.getStringExtra("url_background");
+
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,19 +60,18 @@ public class CreateNewPassword extends AppCompatActivity {
                     edtConfirmPass.requestFocus();
                 }else {
 
-                    for (Account account: listAccount) {
-                        if(id == account.getId()){
-                            account.setId(id);
-                            account.setPassword(newPass);
-                            upDataToSever.upAccount(CreateNewPassword.this);
-                            Intent i_backToLogin = new Intent(CreateNewPassword.this, LoginActivity.class);
-                            startActivity(i_backToLogin);
-                            finish();
-                            break;
+                    Account account = new Account();
+                    account.setId(id);
+                    account.setFullName(fullName);
+                    account.setUsername(user);
+                    account.setUrl_avatar(url_avatar);
+                    account.setUrl_background(url_background);
+                    account.setPassword(edtNewPass.getText().toString());
+                    databaseRef.child(key).setValue(account);
 
-                        }
-                    }
-
+                    Intent backToLogin = new Intent(CreateNewPassword.this, LoginActivity.class);
+                    startActivity(backToLogin);
+                    finish();
                 }
 
             }
