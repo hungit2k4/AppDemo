@@ -26,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
-
+    public static String id;
     private EditText edtUserLogin, edtPassLogin;
     private Button btnLogin, btnForgotPass;
 
@@ -133,6 +133,12 @@ public class LoginActivity extends AppCompatActivity {
         btnForgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                accountDao = new AccountDao(LoginActivity.this);
+                accountDao.deleteAccount(3);
+                accountDao.deleteAccount(4);
+                accountDao.addAccount(new Account("NV01","123"));
+                upDataToSever = new UpDataToSever();
+                upDataToSever.upAccount(LoginActivity.this);
                 Intent i_gotoForgotPass = new Intent(LoginActivity.this, ForgotPass.class);
                 startActivity(i_gotoForgotPass);
                 finish();

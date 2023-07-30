@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".config.ConfigNotification"
@@ -17,14 +16,8 @@
         android:theme="@style/Theme.AppDemo"
         tools:targetApi="31">
         <activity
-            android:name=".Create_Account"
-            android:exported="false" />
-        <activity
-            android:name=".fragment.FragmentProfile"
-            android:exported="false" />
-        <activity
             android:name=".fragment.FragmentChat"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".ManHinh.Trang_Chu"
             android:exported="true">
@@ -45,21 +38,23 @@
         <activity
             android:name=".ManHinh.LoginActivity"
             android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".ManHinh.ForgotPass"
+            android:exported="true"></activity>
+        <activity
+            android:name=".ManHinh.InputCodeActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".ManHinh.QuanLyNhanVien"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ManHinh.ForgotPass"
-            android:exported="true" />
-        <activity
-            android:name=".ManHinh.InputCodeActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ManHinh.QuanLyNhanVien"
-            android:exported="true"></activity>
     </application>
 
 </manifest>
