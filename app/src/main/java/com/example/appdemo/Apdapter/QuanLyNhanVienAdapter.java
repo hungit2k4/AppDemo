@@ -1,11 +1,15 @@
 package com.example.appdemo.Apdapter;
 
+import static com.example.appdemo.R.color.red;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appdemo.Holder.QuanLyNhanVienHolder;
@@ -36,7 +40,6 @@ public class QuanLyNhanVienAdapter extends RecyclerView.Adapter<QuanLyNhanVienHo
     public void onBindViewHolder(@NonNull QuanLyNhanVienHolder holder, int position) {
         NhanVien nhanVien=list.get(position);
         holder.tvMaNV.setText("Mã NV: "+nhanVien.getMaNV());
-
         holder.tvTenNV.setText("Tên nhân viên: "+nhanVien.getTen());
     }
 
