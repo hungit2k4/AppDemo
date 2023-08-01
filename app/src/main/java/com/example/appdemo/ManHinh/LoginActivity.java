@@ -26,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
-    public static String id;
+    public static String idGui,idNhan;
     private EditText edtUserLogin, edtPassLogin;
     private Button btnLogin, btnForgotPass;
 
@@ -103,6 +103,8 @@ public class LoginActivity extends AppCompatActivity {
                                             startActivity(i_goToHome);
                                             finish();
                                             Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_LONG).show();
+                                            idGui=user;
+                                            idNhan= (user.equals("admin2"))?"admin":"admin2";
                                         } else {
                                             edtPassLogin.setError("Sai mật khẩu");
                                             edtPassLogin.requestFocus();

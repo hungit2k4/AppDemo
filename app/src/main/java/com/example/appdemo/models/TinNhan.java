@@ -9,6 +9,9 @@ public class TinNhan {
         this.idNhan = idNhan;
     }
 
+    public TinNhan() {
+    }
+
     public String getIdGui() {
         return idGui;
     }

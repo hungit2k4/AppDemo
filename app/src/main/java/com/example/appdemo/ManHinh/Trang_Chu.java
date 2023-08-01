@@ -65,6 +65,7 @@ public class Trang_Chu extends AppCompatActivity {
 
         if (!url_avatar.isEmpty()) {
             Picasso.get().load(url_avatar).into(imageAvatar);
+
         }
 
         tvHello.setText("Xin chào, " + inFullName);
@@ -82,7 +83,7 @@ public class Trang_Chu extends AppCompatActivity {
                     rltWelcome.setVisibility(View.VISIBLE);
                     fragmentBottom = new FragmentHome();
                 } else if (item.getItemId() == R.id.mChat) {
-                    rltWelcome.setVisibility(View.VISIBLE);
+                    rltWelcome.setVisibility(View.GONE);
                     fragmentBottom = new FragmentChat();
                 } else if (item.getItemId() == R.id.bottom_profile) {
                     rltWelcome.setVisibility(View.GONE);

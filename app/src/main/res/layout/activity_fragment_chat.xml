@@ -13,6 +13,7 @@
         android:background="#0091FF"
         android:padding="10dp">
         <TextView
+            android:id="@+id/tvTenchat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -24,7 +25,8 @@
         android:id="@+id/rcvChat"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:layout_margin="10dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
