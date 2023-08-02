@@ -14,10 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.appdemo.Create_Account;
+import com.example.appdemo.ManHinh.Trang_Chu;
+import com.example.appdemo.fragment.Create_Account;
 import com.example.appdemo.data.acountdao.ChucNang;
 import com.example.appdemo.R;
 import com.example.appdemo.models.Account;
@@ -36,7 +36,7 @@ public class ChucNangAdapter extends RecyclerView.Adapter<ChucNangAdapter.ViewHo
         this.context = context;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imvCN;
         TextView tvCN1, tvCN2;
 
@@ -52,6 +52,7 @@ public class ChucNangAdapter extends RecyclerView.Adapter<ChucNangAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.trang_chu_item, null);
+
         return new ViewHolder(view);
     }
 
@@ -64,6 +65,7 @@ public class ChucNangAdapter extends RecyclerView.Adapter<ChucNangAdapter.ViewHo
         holder.tvCN1.setText(chucNang.getTxt1());
         holder.tvCN2.setText(chucNang.getTxt2());
 
+
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater layoutInflater = ((Activity) context).getLayoutInflater();
         holder.imvCN.setOnClickListener(new View.OnClickListener() {
@@ -72,19 +74,19 @@ public class ChucNangAdapter extends RecyclerView.Adapter<ChucNangAdapter.ViewHo
 
                 if (chucNang.getId() == 5) {
 
+
                     v = layoutInflater.inflate(R.layout.activity_create_account, null);
                     builder.setView(v);
                     AlertDialog alertDialog = builder.create();
                     alertDialog.show();
 
-                     EditText edtIdNV, edtTenNV, edtTenDangNhap, edtMatKhau;
-                     Button btnOkCreate;
+                    EditText edtIdNV, edtTenNV, edtTenDangNhap, edtMatKhau;
+                    Button btnOkCreate;
 
                     DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("Account");
 
                     edtIdNV = v.findViewById(R.id.edtIdNV);
                     edtTenNV = v.findViewById(R.id.edtTenNV);
-                    edtTenDangNhap = v.findViewById(R.id.edtTenDangNhap);
                     edtMatKhau = v.findViewById(R.id.edtMatKhau);
                     btnOkCreate = v.findViewById(R.id.btnOkCreate);
 
@@ -93,30 +95,25 @@ public class ChucNangAdapter extends RecyclerView.Adapter<ChucNangAdapter.ViewHo
                         public void onClick(View v) {
                             String idNV = edtIdNV.getText().toString();
                             String tenNV = edtTenNV.getText().toString();
-                            String tenDangNhap = edtTenDangNhap.getText().toString();
                             String matKhau = edtMatKhau.getText().toString();
 
-                            if(idNV.isEmpty()){
+                            if (idNV.isEmpty()) {
                                 edtIdNV.setError("Id trống");
                                 edtIdNV.requestFocus();
                             } else if (tenNV.isEmpty()) {
                                 edtTenNV.setError("Tên NV trống");
                                 edtTenNV.requestFocus();
-                            } else if (tenDangNhap.isEmpty()) {
-                                edtTenDangNhap.setError("Tên đăng nhập trống");
-                                edtTenDangNhap.requestFocus();
-                            } else if (matKhau.isEmpty()) {
+                            }  else if (matKhau.isEmpty()) {
                                 edtMatKhau.setError("Mật khẩu trống");
                                 edtMatKhau.requestFocus();
-                            }else {
+                            } else {
 
                                 Account account = new Account();
                                 account.setId(Integer.parseInt(idNV));
                                 account.setFullName(tenNV);
-                                account.setUsername(tenDangNhap);
                                 account.setPassword(matKhau);
 
-                                databaseRef.child(tenDangNhap).setValue(account).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                databaseRef.child(idNV).setValue(account).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
                                         Toast.makeText(context, "Tạo tài khoản thành công", Toast.LENGTH_SHORT).show();

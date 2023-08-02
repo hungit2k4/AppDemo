@@ -26,21 +26,26 @@ public class FragmentHome extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.activity_fragment_home, null);
+        View view = inflater.inflate(R.layout.activity_fragment_home, null);
 
         rcvCN = view.findViewById(R.id.rcvCN);
-        list= new ArrayList<>();
-        list.add(new ChucNang(1,R.drawable.icon_thongtin,"Thông tin","Thông tin cá nhân"));
-        list.add(new ChucNang(2, R.drawable.baseline_calendar_month_24,"Lịch họp","Thông tin lịch họp"));
-        list.add(new ChucNang(3,R.drawable.baseline_calendar_month_24,"Chấm công","Bảng chấm công"));
-        list.add(new ChucNang(4,R.drawable.baseline_query_builder_24,"Lịch sử nghỉ","Lịch sử nghỉ,đi muộn"));
-        list.add(new ChucNang(5,R.drawable.baseline_switch_account_24, "Cấp tài khoản", "Cấp tài khoản mới"));
+        list = new ArrayList<>();
+        list.add(new ChucNang(1, R.drawable.icon_thongtin, "Thông tin", "Thông tin cá nhân"));
+        list.add(new ChucNang(2, R.drawable.baseline_calendar_month_24, "Lịch họp", "Thông tin lịch họp"));
+        list.add(new ChucNang(3, R.drawable.baseline_calendar_month_24, "Chấm công", "Bảng chấm công"));
+        list.add(new ChucNang(4, R.drawable.baseline_query_builder_24, "Lịch sử nghỉ", "Lịch sử nghỉ,đi muộn"));
+        list.add(new ChucNang(5, R.drawable.baseline_switch_account_24, "Cấp tài khoản", "Cấp tài khoản mới"));
 
-        adapter=new ChucNangAdapter(list,getContext());
+        adapter = new ChucNangAdapter(list, getContext());
 
         rcvCN.setAdapter(adapter);
-        GridLayoutManager layoutManager=new GridLayoutManager(getContext(),2);
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         rcvCN.setLayoutManager(layoutManager);
+
         return view;
     }
+
+
+
+
 }

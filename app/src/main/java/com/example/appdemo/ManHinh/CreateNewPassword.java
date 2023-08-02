@@ -37,8 +37,7 @@ public class CreateNewPassword extends AppCompatActivity {
         String key = intent.getStringExtra("key");
         String user = intent.getStringExtra("user");
         String fullName = intent.getStringExtra("fullName");
-        String url_avatar = intent.getStringExtra("url_avatar");
-        String url_background = intent.getStringExtra("url_background");
+
 
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,8 +63,7 @@ public class CreateNewPassword extends AppCompatActivity {
                     account.setId(id);
                     account.setFullName(fullName);
                     account.setUsername(user);
-                    account.setUrl_avatar(url_avatar);
-                    account.setUrl_background(url_background);
+
                     account.setPassword(edtNewPass.getText().toString());
                     databaseRef.child(key).setValue(account);
 

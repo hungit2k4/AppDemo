@@ -1,4 +1,4 @@
-package com.example.appdemo;
+package com.example.appdemo.fragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,14 +13,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.appdemo.R;
 import com.example.appdemo.models.Account;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Create_Account extends Fragment {
-
-
 
     @Nullable
     @Override

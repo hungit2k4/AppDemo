@@ -78,8 +78,7 @@ public class ForgotPass extends AppCompatActivity {
                                         int id = account.getId();
                                         String fullName = account.getFullName();
                                         String user = account.getUsername();
-                                        String url_avatar = account.getUrl_avatar();
-                                        String url_background = account.getUrl_background();
+
 
                                         if (getId.equals(String.valueOf(id))) {
 
@@ -88,8 +87,7 @@ public class ForgotPass extends AppCompatActivity {
                                             i_gotoInputCode.putExtra("id", id);
                                             i_gotoInputCode.putExtra("user", user);
                                             i_gotoInputCode.putExtra("fullName", fullName);
-                                            i_gotoInputCode.putExtra("url_avatar", url_avatar);
-                                            i_gotoInputCode.putExtra("url_background", url_background);
+
 
                                             startActivity(i_gotoInputCode);
                                             finish();

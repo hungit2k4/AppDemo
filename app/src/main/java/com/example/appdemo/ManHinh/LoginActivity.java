@@ -29,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     public static String idGui,idNhan;
     private EditText edtUserLogin, edtPassLogin;
     private Button btnLogin, btnForgotPass;
+    String key = null;
 
 
     @Override
@@ -60,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                     databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            String key = null;
+
 
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()
                             ) {
@@ -84,27 +85,19 @@ public class LoginActivity extends AppCompatActivity {
                                         if (pass.equals(account.getPassword())) {
 
                                             Intent i_goToHome = new Intent(LoginActivity.this, Trang_Chu.class);
-
+                                            i_goToHome.putExtra("key", key);
                                             i_goToHome.putExtra("id", account.getId());
                                             i_goToHome.putExtra("fullName", account.getFullName());
                                             i_goToHome.putExtra("user", account.getUsername());
                                             i_goToHome.putExtra("pass", account.getPassword());
 
-                                            if(account.getUrl_avatar() == null){
-                                                i_goToHome.putExtra("urlAvatar","");
-                                            }else {
-                                                i_goToHome.putExtra("urlAvatar",account.getUrl_avatar());
-                                            }
-                                            if(account.getUrl_background() == null){
-                                                i_goToHome.putExtra("urlBackground","");
-                                            }else {
-                                                i_goToHome.putExtra("urlBackground",account.getUrl_background());
-                                            }
                                             startActivity(i_goToHome);
                                             finish();
                                             Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_LONG).show();
+
                                             idGui=user;
                                             idNhan= (user.equals("admin2"))?"admin":"admin2";
+
                                         } else {
                                             edtPassLogin.setError("Sai mật khẩu");
                                             edtPassLogin.requestFocus();

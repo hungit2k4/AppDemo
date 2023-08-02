@@ -19,8 +19,16 @@ import com.example.appdemo.fragment.FragmentChat;
 import com.example.appdemo.fragment.FragmentHome;
 import com.example.appdemo.R;
 import com.example.appdemo.fragment.FragmentProfile;
+import com.example.appdemo.models.ImageAccount;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -32,8 +40,10 @@ public class Trang_Chu extends AppCompatActivity {
     RelativeLayout rltWelcome;
     FrameLayout frLayout;
     BottomNavigationView bottomNavigationView;
-    private String inFullName, user, pass, url_avatar, url_background;
-    private int id;
+    DatabaseReference databaseRef;
+    StorageReference storageRef;
+    public static String inFullName, user, pass, key, old_url_avatar, old_url_background;
+    public static int id;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -60,12 +70,36 @@ public class Trang_Chu extends AppCompatActivity {
         inFullName = intent.getStringExtra("fullName");
         user = intent.getStringExtra("user");
         pass = intent.getStringExtra("pass");
-        url_avatar = intent.getStringExtra("urlAvatar");
-        url_background = intent.getStringExtra("urlBackground");
+        key = intent.getStringExtra("key");
 
-        if (!url_avatar.isEmpty()) {
-            Picasso.get().load(url_avatar).into(imageAvatar);
+        storageRef = FirebaseStorage.getInstance().getReference("ImageAccount");
+        databaseRef = FirebaseDatabase.getInstance().getReference("ImageAccount");
 
+        if (key != null) {
+            databaseRef.child(key).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+
+                    if (snapshot.getValue(ImageAccount.class) != null) {
+                        ImageAccount imageAccount = snapshot.getValue(ImageAccount.class);
+
+                        old_url_avatar = imageAccount.getUrlImage();
+                        old_url_background = imageAccount.getUrl_Image_Background();
+
+                        Picasso.get().load(old_url_avatar).into(imageAvatar);
+
+                        tvHello.setText("Xin chào, "+inFullName);
+
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
         }
 
         tvHello.setText("Xin chào, " + inFullName);
@@ -111,35 +145,6 @@ public class Trang_Chu extends AppCompatActivity {
         });
     }
 
-    public String getFullName() {
-        String fullName = inFullName;
-        return fullName;
-    }
-
-    public int getIdOfAccount() {
-        int putId = id;
-        return putId;
-    }
-
-    public String getUserOfAccount() {
-        String putUser = user;
-        return putUser;
-    }
-
-    public String getPassOfAccount() {
-        String putPass = pass;
-        return putPass;
-    }
-
-    public String getUrl_avatar() {
-        String putUrl_Avatar = url_avatar;
-        return putUrl_Avatar;
-    }
-
-    public String getUrl_background() {
-        String putUrl_Background = url_background;
-        return putUrl_Background;
-    }
 
 }
 

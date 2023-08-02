@@ -5,6 +5,7 @@ import static android.app.Activity.RESULT_OK;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.MailTo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +30,7 @@ import com.example.appdemo.ManHinh.Trang_Chu;
 import com.example.appdemo.R;
 import com.example.appdemo.models.Account;
 
+import com.example.appdemo.models.ImageAccount;
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -73,22 +75,19 @@ public class FragmentProfile extends Fragment {
         parent_layout = view.findViewById(R.id.parent_layout);
 
         Trang_Chu trang_chu = (Trang_Chu) getActivity();
-        tvId.setText(String.valueOf(trang_chu.getIdOfAccount()));
-        tvName.setText(trang_chu.getFullName());
+
+        tvId.setText(String.valueOf(Trang_Chu.id));
+        tvName.setText(Trang_Chu.inFullName);
         tvEmail.setText("");
 
-        String url_avatar = trang_chu.getUrl_avatar();
-        String url_background = trang_chu.getUrl_background();
-
-        if(!url_avatar.isEmpty()){
-            Picasso.get().load(url_avatar).into(imgAvatar);
-        }
-        if(!url_background.isEmpty()){
-            Picasso.get().load(url_background).into(imgBackground);
+        if(Trang_Chu.key != null){
+            Picasso.get().load(Trang_Chu.old_url_avatar).into(imgAvatar);
+            Picasso.get().load(Trang_Chu.old_url_background).into(imgBackground);
         }
 
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference("Account");
-        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("Account");
+
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference("ImageAccount");
+        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("ImageAccount");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         LayoutInflater layoutInflater = ((Activity) getContext()).getLayoutInflater();
@@ -121,10 +120,10 @@ public class FragmentProfile extends Fragment {
 
 
                     if(check_Avatar_isClick == true){
-                         pickRef = storageReference.child("Image of "+trang_chu.getUserOfAccount());
+                         pickRef = storageReference.child("Image of "+Trang_Chu.user);
                     }
                     if(check_Background_isClick == true){
-                         pickRef = storageReference.child("Image Background of "+trang_chu.getUserOfAccount());
+                         pickRef = storageReference.child("Image Background of "+Trang_Chu.user);
                     }
 
                     if(pickRef != null){
@@ -140,29 +139,26 @@ public class FragmentProfile extends Fragment {
                                         Uri downloadUrl = uriTask.getResult();
                                         url_Image = downloadUrl.toString();
 
-                                        Account account = new Account();
-//                                        account.setEmail(mainActivity.getEmailUser());
-                                        account.setFullName(trang_chu.getFullName());
-                                        account.setUsername(trang_chu.getUserOfAccount());
-                                        account.setPassword(trang_chu.getPassOfAccount());
+                                        ImageAccount imageAccount = new ImageAccount();
+
 
                                         if(check_Avatar_isClick == true){
-                                            account.setUrl_avatar(url_Image);
+                                            imageAccount.setUrlImage(url_Image);
                                             Picasso.get().load(url_Image).into(imgAvatar);
                                             check_Avatar_isClick = false;
                                         }else {
-                                            account.setUrl_avatar(trang_chu.getUrl_avatar());
+                                            imageAccount.setUrlImage(Trang_Chu.old_url_avatar);
                                         }
 
                                         if(check_Background_isClick == true){
-                                            account.setUrl_background(url_Image);
+                                            imageAccount.setUrl_Image_Background(url_Image);
                                             Picasso.get().load(url_Image).into(imgBackground);
                                             check_Background_isClick = false;
                                         }else {
-                                            account.setUrl_background(trang_chu.getUrl_background());
+                                            imageAccount.setUrl_Image_Background(Trang_Chu.old_url_background);
                                         }
 
-                                        databaseRef.child(trang_chu.getUserOfAccount()).setValue(account);
+                                        databaseRef.child(Trang_Chu.user).setValue(imageAccount);
 
                                         Toast.makeText(getContext(), "Tải ảnh lên thành công", Toast.LENGTH_SHORT).show();
 //                                        requireActivity().getSupportFragmentManager()
