@@ -154,7 +154,34 @@
                 android:text="Cấp tài khoản mới"
                 android:textSize="18dp"/>
         </LinearLayout>
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="160dp"
+            android:background="@drawable/khung_cn"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:gravity="center">
+            <ImageView
 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_addnv"/>
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quản lý nhân viên"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thêm, xóa, sửa"
+                android:textSize="18dp"/>
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

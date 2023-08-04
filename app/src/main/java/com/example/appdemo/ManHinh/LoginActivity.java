@@ -14,17 +14,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.appdemo.R;
-import com.example.appdemo.data.UpDataToSever;
-import com.example.appdemo.data.acountdao.NhanVienDao;
 import com.example.appdemo.models.Account;
-import com.example.appdemo.models.NhanVien;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
     public static String idGui,idNhan;

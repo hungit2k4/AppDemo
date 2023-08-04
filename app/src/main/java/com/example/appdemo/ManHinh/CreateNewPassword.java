@@ -9,12 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.appdemo.R;
-import com.example.appdemo.data.UpDataToSever;
 import com.example.appdemo.models.Account;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
 
 public class CreateNewPassword extends AppCompatActivity {
 
