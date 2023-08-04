@@ -8,7 +8,6 @@ import android.os.Bundle;
 
 import com.example.appdemo.Apdapter.QuanLyNhanVienAdapter;
 import com.example.appdemo.R;
-import com.example.appdemo.data.acountdao.NhanVienDao;
 import com.example.appdemo.models.NhanVien;
 
 import java.util.ArrayList;
@@ -17,7 +16,6 @@ public class QuanLyNhanVien extends AppCompatActivity {
     ArrayList<NhanVien> list= new ArrayList<>();
     QuanLyNhanVienAdapter nhanVienAdapter;
     RecyclerView rcvNhanVien;
-    NhanVienDao nhanVienDao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
