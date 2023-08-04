@@ -2,7 +2,6 @@ package com.example.appdemo.models;
 
 public class Account {
 
-    private int id;
     private String fullName;
     private String username;
     private String password;
@@ -12,8 +11,7 @@ public class Account {
     public Account() {
     }
 
-    public Account(int id, String username, String password, String url_avatar, String url_background, String fullName, String phoneNumber) {
-        this.id = id;
+    public Account(String username, String password, String url_avatar, String url_background, String fullName, String phoneNumber) {
         this.fullName = fullName;
         this.username = username;
         this.password = password;
@@ -25,13 +23,6 @@ public class Account {
         this.password = password;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;

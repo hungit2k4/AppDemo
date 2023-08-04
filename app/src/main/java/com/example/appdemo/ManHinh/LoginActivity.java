@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.appdemo.R;
 import com.example.appdemo.data.UpDataToSever;
 import com.example.appdemo.data.acountdao.NhanVienDao;
@@ -29,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     public static String idGui,idNhan;
     private EditText edtUserLogin, edtPassLogin;
     private Button btnLogin, btnForgotPass;
+    private LottieAnimationView loading_login;
     String key = null;
 
 
@@ -41,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         edtPassLogin = findViewById(R.id.edtPassLogin);
         btnLogin = findViewById(R.id.btnLogin);
         btnForgotPass = findViewById(R.id.btnForgotPass);
+        loading_login = findViewById(R.id.loading_login);
 
         DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("Account");
 
@@ -77,6 +80,13 @@ public class LoginActivity extends AppCompatActivity {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                                        if(loading_login != null){
+                                            loading_login.setVisibility(View.VISIBLE);
+                                        }else {
+                                            loading_login.cancelAnimation();
+                                            loading_login.setVisibility(View.GONE);
+                                        }
+
                                         Account account = new Account();
                                         account = snapshot.getValue(Account.class);
 
@@ -86,14 +96,13 @@ public class LoginActivity extends AppCompatActivity {
 
                                             Intent i_goToHome = new Intent(LoginActivity.this, Trang_Chu.class);
                                             i_goToHome.putExtra("key", key);
-                                            i_goToHome.putExtra("id", account.getId());
                                             i_goToHome.putExtra("fullName", account.getFullName());
                                             i_goToHome.putExtra("user", account.getUsername());
                                             i_goToHome.putExtra("pass", account.getPassword());
 
                                             startActivity(i_goToHome);
                                             finish();
-                                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(LoginActivity.this, "Welcome "+name, Toast.LENGTH_LONG).show();
 
                                             idGui=user;
                                             idNhan= (user.equals("admin2"))?"admin":"admin2";

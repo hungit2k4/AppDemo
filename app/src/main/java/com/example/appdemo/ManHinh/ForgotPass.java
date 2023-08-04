@@ -75,19 +75,16 @@ public class ForgotPass extends AppCompatActivity {
                                         Account account = new Account();
                                         account = snapshot.getValue(Account.class);
 
-                                        int id = account.getId();
                                         String fullName = account.getFullName();
                                         String user = account.getUsername();
 
 
-                                        if (getId.equals(String.valueOf(id))) {
+                                        if (getId.equals(user)) {
 
                                             Intent i_gotoInputCode = new Intent(ForgotPass.this, InputCodeActivity.class);
                                             i_gotoInputCode.putExtra("key", key);
-                                            i_gotoInputCode.putExtra("id", id);
                                             i_gotoInputCode.putExtra("user", user);
                                             i_gotoInputCode.putExtra("fullName", fullName);
-
 
                                             startActivity(i_gotoInputCode);
                                             finish();

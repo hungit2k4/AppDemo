@@ -19,12 +19,25 @@
             android:layout_height="wrap_content"
             app:cardCornerRadius="1000dp"
             >
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loading_home"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:lottie_rawRes="@raw/loading2"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            />
+
             <ImageView
                 android:id="@+id/imageAvatar"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/baseline_account_80" />
+                 />
         </androidx.cardview.widget.CardView>
 
 

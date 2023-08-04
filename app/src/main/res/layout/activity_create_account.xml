@@ -90,14 +90,37 @@
             />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnOkCreate"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="OK"
-        app:cornerRadius="10dp"
+        android:orientation="horizontal"
         android:layout_marginTop="20dp"
-        android:layout_gravity="center"/>
+
+        android:gravity="center"
+        >
+        <Button
+            android:id="@+id/btnOkCreate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OK"
+            app:cornerRadius="10dp"
+            android:layout_gravity="center"/>
+
+        <View
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            />
+
+        <Button
+            android:id="@+id/btnExit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            app:cornerRadius="10dp"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
 
 
 </LinearLayout>

@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.appdemo.fragment.Create_Account;
 import com.example.appdemo.fragment.FragmentChat;
 import com.example.appdemo.fragment.FragmentHome;
@@ -29,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -36,8 +38,9 @@ import java.util.Date;
 
 public class Trang_Chu extends AppCompatActivity {
     TextView btnThongBao, tvDate, tvHello;
+    LottieAnimationView loading_home;
     ImageView imageAvatar;
-    RelativeLayout rltWelcome;
+    public static RelativeLayout rltWelcome;
     FrameLayout frLayout;
     BottomNavigationView bottomNavigationView;
     DatabaseReference databaseRef;
@@ -57,6 +60,7 @@ public class Trang_Chu extends AppCompatActivity {
         btnThongBao = findViewById(R.id.btnThongBao);
         tvDate = findViewById(R.id.tvDate);
         tvHello = findViewById(R.id.tvHello);
+        loading_home = findViewById(R.id.loading_home);
 
         Date date = new Date();// Định dạng để lấy thứ, ngày và tháng
 
@@ -87,7 +91,18 @@ public class Trang_Chu extends AppCompatActivity {
                         old_url_avatar = imageAccount.getUrlImage();
                         old_url_background = imageAccount.getUrl_Image_Background();
 
-                        Picasso.get().load(old_url_avatar).into(imageAvatar);
+                        Picasso.get().load(old_url_avatar).into(imageAvatar, new Callback() {
+                            @Override
+                            public void onSuccess() {
+                                loading_home.cancelAnimation();
+                                loading_home.setVisibility(View.GONE);
+                            }
+
+                            @Override
+                            public void onError(Exception e) {
+
+                            }
+                        });
 
                         tvHello.setText("Xin chào, "+inFullName);
 
@@ -114,13 +129,16 @@ public class Trang_Chu extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragmentBottom = null;
                     if (item.getItemId() == R.id.bottom_home) {
+                        item.setTitle("Home");
                         rltWelcome.setVisibility(View.VISIBLE);
                         fragmentBottom = new FragmentHome();
                 } else if (item.getItemId() == R.id.mChat) {
-                    rltWelcome.setVisibility(View.GONE);
+                        item.setTitle("Chat");
+                        rltWelcome.setVisibility(View.GONE);
                     fragmentBottom = new FragmentChat();
                 } else if (item.getItemId() == R.id.bottom_profile) {
-                    rltWelcome.setVisibility(View.GONE);
+                        item.setTitle("Profile");
+                        rltWelcome.setVisibility(View.GONE);
                     fragmentBottom = new FragmentProfile();
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.frLayout, fragmentBottom).commit();

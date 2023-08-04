@@ -60,7 +60,6 @@ public class CreateNewPassword extends AppCompatActivity {
                 }else {
 
                     Account account = new Account();
-                    account.setId(id);
                     account.setFullName(fullName);
                     account.setUsername(user);
 

@@ -68,8 +68,10 @@ public class FragmentHome extends Fragment {
             @Override
             public void onClick(View v) {
                Fragment fragment =new Create_Account();
-                RelativeLayout rltWelcome=getActivity().findViewById(R.id.rltWelcome);
+                RelativeLayout rltWelcome = getActivity().findViewById(R.id.rltWelcome);
+
                 rltWelcome.setVisibility(View.GONE);
+
                 getActivity().getSupportFragmentManager().beginTransaction().
                         replace(R.id.frLayout,fragment).addToBackStack(null).commit();
             }

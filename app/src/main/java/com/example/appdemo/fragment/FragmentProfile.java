@@ -4,6 +4,7 @@ import static android.app.Activity.RESULT_OK;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.MailTo;
 import android.net.Uri;
@@ -26,6 +27,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.appdemo.ManHinh.LoginActivity;
 import com.example.appdemo.ManHinh.Trang_Chu;
 import com.example.appdemo.R;
 import com.example.appdemo.models.Account;
@@ -96,6 +98,38 @@ public class FragmentProfile extends Fragment {
 
         Button btnChooseImage = v.findViewById(R.id.btnChooseImage);
         AlertDialog alertDialog = builder.create();
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+                builder1.setTitle("Đăng xuất");
+                builder1.setMessage("Bạn có muốn đăng xuất?");
+                builder1.setIcon(R.drawable.baseline_warning_amber_24);
+
+                builder1.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getContext(), LoginActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                        alertDialog.dismiss();
+                    }
+                });
+
+                builder1.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+                AlertDialog alertDialog1 = builder1.create();
+                alertDialog1.show();
+
+
+            }
+        });
 
 
         btnChooseImage.setOnClickListener(new View.OnClickListener() {
