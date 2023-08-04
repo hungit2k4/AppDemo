@@ -27,6 +27,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.appdemo.ManHinh.LoginActivity;
 import com.example.appdemo.ManHinh.Trang_Chu;
 import com.example.appdemo.R;
@@ -43,12 +44,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 public class FragmentProfile extends Fragment {
 
     private ImageView imgBackground, imgAvatar;
     private TextView tvName, tvEmail, tvPhone, tvId;
+    private LottieAnimationView loading_avatar, loading_background;
     private Button btnEditProfile, btnLogout, btnOkProfile;
     private final int PICK_IMAGE_REQUEST = 1;
     private Uri uri_Image;
@@ -75,6 +78,8 @@ public class FragmentProfile extends Fragment {
         btnLogout = view.findViewById(R.id.btnLogout);
         btnOkProfile = view.findViewById(R.id.btnOkProfile);
         parent_layout = view.findViewById(R.id.parent_layout);
+        loading_avatar = view.findViewById(R.id.loading_avatar);
+        loading_background = view.findViewById(R.id.loading_background);
 
         Trang_Chu trang_chu = (Trang_Chu) getActivity();
 
@@ -83,8 +88,32 @@ public class FragmentProfile extends Fragment {
         tvEmail.setText("");
 
         if(Trang_Chu.key != null){
-            Picasso.get().load(Trang_Chu.old_url_avatar).into(imgAvatar);
-            Picasso.get().load(Trang_Chu.old_url_background).into(imgBackground);
+            Picasso.get().load(Trang_Chu.old_url_avatar).into(imgAvatar, new Callback() {
+                @Override
+                public void onSuccess() {
+                    loading_avatar.cancelAnimation();
+                    loading_avatar.setVisibility(View.GONE);
+
+                    loading_background.cancelAnimation();
+                    loading_background.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onError(Exception e) {
+
+                }
+            });
+            Picasso.get().load(Trang_Chu.old_url_background).into(imgBackground, new Callback() {
+                @Override
+                public void onSuccess() {
+
+                }
+
+                @Override
+                public void onError(Exception e) {
+
+                }
+            });
         }
 
 
