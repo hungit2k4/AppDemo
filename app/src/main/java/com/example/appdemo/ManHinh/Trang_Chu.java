@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.appdemo.Apdapter.ChucNangAdapter;
+import com.example.appdemo.fragment.Create_Account;
 import com.example.appdemo.fragment.FragmentChat;
 import com.example.appdemo.fragment.FragmentHome;
 import com.example.appdemo.R;
@@ -113,9 +113,9 @@ public class Trang_Chu extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragmentBottom = null;
-                if (item.getItemId() == R.id.bottom_home) {
-                    rltWelcome.setVisibility(View.VISIBLE);
-                    fragmentBottom = new FragmentHome();
+                    if (item.getItemId() == R.id.bottom_home) {
+                        rltWelcome.setVisibility(View.VISIBLE);
+                        fragmentBottom = new FragmentHome();
                 } else if (item.getItemId() == R.id.mChat) {
                     rltWelcome.setVisibility(View.GONE);
                     fragmentBottom = new FragmentChat();
@@ -144,7 +144,6 @@ public class Trang_Chu extends AppCompatActivity {
             }
         });
     }
-
 
 }
 

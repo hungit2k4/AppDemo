@@ -1,15 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.FragmentHome">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcvCN"
+    tools:context=".fragment.FragmentHome"
+    android:orientation="vertical">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-       />
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/btnCaNhan"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="160dp"
+            android:background="@drawable/khung_cn"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_margin="10dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_thongtin"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cá nhân"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thông tin cá nhân"
+                android:textSize="18dp"/>
+        </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:id="@+id/btnChamCong"
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/khung_cn"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_calendar_month_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chấm công"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bảng chấm công"
+                android:textSize="18dp" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/cNNhanVien"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/btnDKNghi"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="160dp"
+            android:background="@drawable/khung_cn"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_margin="10dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_lichsunghi"/>
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đăng ký nghỉ"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đăng ký nghỉ"
+                android:textSize="18dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/btnDoiMK"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="160dp"
+            android:background="@drawable/khung_cn"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_margin="10dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_doimk"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đổi mật khẩu"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bảng chấm công"
+                android:textSize="18dp"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/cNAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/btnCapTk"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="160dp"
+            android:background="@drawable/khung_cn"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:gravity="center">
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_switch_account_24"/>
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cấp tài khoản"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cấp tài khoản mới"
+                android:textSize="18dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>
