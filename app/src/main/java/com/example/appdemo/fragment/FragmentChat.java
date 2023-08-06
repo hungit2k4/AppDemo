@@ -2,7 +2,6 @@ package com.example.appdemo.fragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,11 +15,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.appdemo.Apdapter.ChatAdapter;
 import com.example.appdemo.ManHinh.LoginActivity;
-import com.example.appdemo.ManHinh.Trang_Chu;
 import com.example.appdemo.R;
 import com.example.appdemo.models.TinNhan;
 import com.google.firebase.database.DataSnapshot;
@@ -45,7 +42,7 @@ public class FragmentChat extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_fragment_chat,null);
+        View view = inflater.inflate(R.layout.fragment_chat,null);
         edtChat = view.findViewById(R.id.edtChat);
         btnSendTN = view.findViewById(R.id.btnSendTN);
         rcvChat = view.findViewById(R.id.rcvChat);

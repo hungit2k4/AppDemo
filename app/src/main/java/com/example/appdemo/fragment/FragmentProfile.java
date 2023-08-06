@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.MailTo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,10 +18,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -31,10 +26,8 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.example.appdemo.ManHinh.LoginActivity;
 import com.example.appdemo.ManHinh.Trang_Chu;
 import com.example.appdemo.R;
-import com.example.appdemo.models.Account;
 
 import com.example.appdemo.models.ImageAccount;
-import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -65,7 +58,7 @@ public class FragmentProfile extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_fragment_profile, null);
+        View view = inflater.inflate(R.layout.fragment_profile, null);
 
         imgBackground = view.findViewById(R.id.imgBackground);
         imgAvatar = view.findViewById(R.id.imgAvatar);

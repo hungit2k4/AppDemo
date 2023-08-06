@@ -3,31 +3,24 @@ package com.example.appdemo.fragment;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.appdemo.ManHinh.LoginActivity;
-import com.example.appdemo.ManHinh.Trang_Chu;
 import com.example.appdemo.R;
-
-import java.util.ArrayList;
+import com.example.appdemo.fragment.create_account.Fragment_Create_Account;
 
 public class FragmentHome extends Fragment {
     LinearLayout btnCaNhan,btnChamCong,btnDKNghi,btnDoiMK,btnCapTk,cNAdmin,cNNhanVien;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.activity_fragment_home, null);
+            View view = inflater.inflate(R.layout.fragment_home, null);
         btnCaNhan= view.findViewById(R.id.btnCaNhan);
         btnChamCong= view.findViewById(R.id.btnChamCong);
         btnDKNghi= view.findViewById(R.id.btnDKNghi);
@@ -67,7 +60,7 @@ public class FragmentHome extends Fragment {
         btnCapTk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Fragment fragment =new Create_Account();
+               Fragment fragment =new Fragment_Create_Account();
                 RelativeLayout rltWelcome = getActivity().findViewById(R.id.rltWelcome);
 
                 rltWelcome.setVisibility(View.GONE);
