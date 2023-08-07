@@ -17,6 +17,7 @@ import com.example.appdemo.fragment.create_account.Fragment_Create_Account;
 
 public class FragmentHome extends Fragment {
     LinearLayout btnCaNhan,btnChamCong,btnDKNghi,btnDoiMK,btnCapTk,cNAdmin,cNNhanVien;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -28,11 +29,13 @@ public class FragmentHome extends Fragment {
         btnCapTk= view.findViewById(R.id.btnCapTk);
         cNAdmin= view.findViewById(R.id.cNAdmin);
         cNNhanVien= view.findViewById(R.id.cNNhanVien);
+
         String check = "^admin\\w{0,}";
         if (LoginActivity.idGui.matches(check))
             cNNhanVien.setVisibility(View.GONE);
         else
             cNAdmin.setVisibility(View.GONE);
+
         btnCaNhan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

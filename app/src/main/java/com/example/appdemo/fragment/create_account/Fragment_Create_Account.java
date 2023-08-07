@@ -47,8 +47,10 @@ public class Fragment_Create_Account extends Fragment {
         edtIdNV = view.findViewById(R.id.edtIdNV);
         edtTenNV = view.findViewById(R.id.edtTenNV);
         edtMatKhau = view.findViewById(R.id.edtMatKhau);
+
         btnOkCreate = view.findViewById(R.id.btnOkCreate);
         btnExit = view.findViewById(R.id.btnExit);
+
         rcView_Account = view.findViewById(R.id.rcView_Account);
         tv_showOrHide = view.findViewById(R.id.tv_showOrHide);
         linear_create_account = view.findViewById(R.id.linear_create_account);

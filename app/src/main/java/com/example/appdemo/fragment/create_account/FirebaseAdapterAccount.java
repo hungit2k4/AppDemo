@@ -124,7 +124,6 @@ public class FirebaseAdapterAccount extends FirebaseRecyclerAdapter<Account, Fir
                                 Toast.makeText(v.getContext(), "Đã sửa đổi tài khoản", Toast.LENGTH_SHORT).show();
                             }
                         });
-                        
                     }
                 });
                 
@@ -147,9 +146,11 @@ public class FirebaseAdapterAccount extends FirebaseRecyclerAdapter<Account, Fir
         }
 
         public void onBin(Account account) {
-            name_account.setText(account.getFullName());
-            user_account.setText(account.getUsername());
-            pass_account.setText(account.getPassword());
+            if(account != null){
+                name_account.setText(account.getFullName());
+                user_account.setText(account.getUsername());
+                pass_account.setText(account.getPassword());
+            }
         }
     }
 }
