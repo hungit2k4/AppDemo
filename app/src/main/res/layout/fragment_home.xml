@@ -155,6 +155,7 @@
                 android:textSize="18dp"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/btnAddNV"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="160dp"

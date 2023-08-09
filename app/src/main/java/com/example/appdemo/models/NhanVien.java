@@ -1,17 +1,17 @@
 package com.example.appdemo.models;
 
 public class NhanVien {
-    private  String maNV,ten, ngaySinh,diaChi,chucVu;
+    private  String maNV,ten, ngaySinh,diaChi,email;
     private Integer soDT, gioiTinh;
 
-    public NhanVien(String maNV, String ten, String ngaySinh, Integer gioiTinh, Integer soDT, String diaChi, String chucVu) {
+    public NhanVien(String maNV, String ten, String ngaySinh, Integer gioiTinh, Integer soDT, String diaChi,String email) {
         this.maNV = maNV;
         this.ten = ten;
         this.ngaySinh = ngaySinh;
         this.gioiTinh = gioiTinh;
         this.soDT = soDT;
         this.diaChi = diaChi;
-        this.chucVu = chucVu;
+        this.email= email;
     }
 
     public NhanVien() {
@@ -65,11 +65,11 @@ public class NhanVien {
         this.diaChi = diaChi;
     }
 
-    public String getChucVu() {
-        return chucVu;
+    public String getEmail() {
+        return email;
     }
 
-    public void setChucVu(String chucVu) {
-        this.chucVu = chucVu;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
