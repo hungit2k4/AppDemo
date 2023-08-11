@@ -76,8 +76,8 @@ public class QuanLyNhanVienAdapter extends RecyclerView.Adapter<QuanLyNhanVienHo
         holder.btnEditNV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ThemNV.class);
-                intent.putExtra("check","1");
+//                Intent intent = new Intent(v.getContext(), ThemNV.class);
+//                intent.putExtra("check","1");
 
             }
         });

@@ -26,19 +26,20 @@ import com.example.appdemo.fragment.create_account.Fragment_Create_Account;
 import java.util.ArrayList;
 
 public class FragmentHome extends Fragment {
-    LinearLayout btnCaNhan,btnChamCong,btnDKNghi,btnDoiMK,btnCapTk,cNAdmin,cNNhanVien,btnAddNV;
+    LinearLayout btnCaNhan, btnChamCong, btnDKNghi, btnDoiMK, btnCapTk, cNAdmin, cNNhanVien, btnAddNV;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.fragment_home, null);
-        btnCaNhan= view.findViewById(R.id.btnCaNhan);
-        btnChamCong= view.findViewById(R.id.btnChamCong);
-        btnDKNghi= view.findViewById(R.id.btnDKNghi);
-        btnDoiMK= view.findViewById(R.id.btnDoiMK);
-        btnCapTk= view.findViewById(R.id.btnCapTk);
-        cNAdmin= view.findViewById(R.id.cNAdmin);
-        cNNhanVien= view.findViewById(R.id.cNNhanVien);
-        btnAddNV=view.findViewById(R.id.btnAddNV);
+        View view = inflater.inflate(R.layout.fragment_home, null);
+        btnCaNhan = view.findViewById(R.id.btnCaNhan);
+        btnChamCong = view.findViewById(R.id.btnChamCong);
+        btnDKNghi = view.findViewById(R.id.btnDKNghi);
+        btnDoiMK = view.findViewById(R.id.btnDoiMK);
+        btnCapTk = view.findViewById(R.id.btnCapTk);
+        cNAdmin = view.findViewById(R.id.cNAdmin);
+        cNNhanVien = view.findViewById(R.id.cNNhanVien);
+        btnAddNV = view.findViewById(R.id.btnAddNV);
         String check = "^admin\\w{0,}";
         if (LoginActivity.idGui.matches(check))
             cNNhanVien.setVisibility(View.GONE);
@@ -71,22 +72,25 @@ public class FragmentHome extends Fragment {
         btnCapTk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Fragment fragment =new Fragment_Create_Account();
+                Fragment fragment = new Fragment_Create_Account();
                 RelativeLayout rltWelcome = getActivity().findViewById(R.id.rltWelcome);
 
                 rltWelcome.setVisibility(View.GONE);
 
                 getActivity().getSupportFragmentManager().beginTransaction().
-                        replace(R.id.frLayout,fragment).addToBackStack(null).commit();
+                        replace(R.id.frLayout, fragment).addToBackStack(null).commit();
             }
         });
         btnAddNV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(getActivity(), QuanLyNhanVien.class);
                 startActivity(intent);
+
             }
         });
+
         return view;
     }
 }
