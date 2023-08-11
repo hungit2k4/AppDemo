@@ -81,7 +81,7 @@ public class ThemNV extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                        Boolean checkAccount = true;
+                        Boolean checkAccount = false;
 
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()
                         ) {
@@ -92,8 +92,6 @@ public class ThemNV extends AppCompatActivity {
                                 checkAccount = true;
                                 break;
 
-                            } else {
-                                checkAccount = false;
                             }
 
                         }
@@ -140,11 +138,12 @@ public class ThemNV extends AppCompatActivity {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-
+                                        Boolean checkTrungMaNV = false;
                                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                                             String key = dataSnapshot.getRef().getKey();
 
                                             if (key.equals(maNv)) {
+                                                checkTrungMaNV = true;
                                                 AlertDialog.Builder builder = new AlertDialog.Builder(ThemNV.this);
                                                 builder.setTitle("Thông báo");
                                                 builder.setMessage("Nhân viên đã tồn tại nên chúng tôi sẽ chuyển sang dạng chỉnh sửa");
@@ -170,7 +169,8 @@ public class ThemNV extends AppCompatActivity {
                                                 edtMaNV.setError("Mã nv đã tồn tại");
                                                 edtMaNV.requestFocus();
                                                 break;
-                                            } else {
+                                            }
+                                            if(checkTrungMaNV == false) {
                                                 NhanVien nhanVien = new NhanVien();
 
                                                 nhanVien.setTen(tenNv);
