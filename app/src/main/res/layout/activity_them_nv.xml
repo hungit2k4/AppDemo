@@ -79,7 +79,6 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/khung_cn"
                 android:hint="Nhập ngày sinh"
-                android:inputType="date"
                 android:padding="10dp" />
 
             <LinearLayout

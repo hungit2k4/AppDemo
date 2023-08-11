@@ -17,7 +17,9 @@ import android.widget.Toast;
 import com.example.appdemo.R;
 import com.example.appdemo.models.Account;
 import com.example.appdemo.models.NhanVien;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -81,7 +83,7 @@ public class ThemNV extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                        Boolean checkAccount = false;
+                        Boolean checkAccount = true;
 
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()
                         ) {
@@ -92,6 +94,8 @@ public class ThemNV extends AppCompatActivity {
                                 checkAccount = true;
                                 break;
 
+                            } else {
+                                checkAccount = false;
                             }
 
                         }
@@ -132,18 +136,15 @@ public class ThemNV extends AppCompatActivity {
                                 edtEmail.requestFocus();
                             } else {
 
-
-
                                 databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    Boolean checkTrungManvforThongTin=true;
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                                        Boolean checkTrungMaNV = false;
                                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                                             String key = dataSnapshot.getRef().getKey();
 
                                             if (key.equals(maNv)) {
-                                                checkTrungMaNV = true;
                                                 AlertDialog.Builder builder = new AlertDialog.Builder(ThemNV.this);
                                                 builder.setTitle("Thông báo");
                                                 builder.setMessage("Nhân viên đã tồn tại nên chúng tôi sẽ chuyển sang dạng chỉnh sửa");
@@ -165,34 +166,24 @@ public class ThemNV extends AppCompatActivity {
 
                                                 AlertDialog alertDialog = builder.create();
                                                 alertDialog.show();
-
                                                 edtMaNV.setError("Mã nv đã tồn tại");
                                                 edtMaNV.requestFocus();
+                                                checkTrungManvforThongTin=true;
                                                 break;
                                             }
-                                            if(checkTrungMaNV == false) {
-                                                NhanVien nhanVien = new NhanVien();
-
-                                                nhanVien.setTen(tenNv);
-                                                nhanVien.setEmail(email);
-                                                nhanVien.setDiaChi(diaChi);
-                                                nhanVien.setMaNV(maNv);
-                                                nhanVien.setGioiTinh(gioiTinh);
-                                                nhanVien.setNgaySinh(ngaySinh);
-                                                nhanVien.setSoDT(sDT);
-
-                                                databaseRef.child(maNv).setValue(nhanVien).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            else checkTrungManvforThongTin= false;
+                                            }
+                                            if (checkTrungManvforThongTin==false){
+                                                NhanVien nhanVien = new NhanVien(maNv,tenNv,ngaySinh,gioiTinh,sDT, diaChi,email);
+                                                databaseRef.child(maNv).setValue(nhanVien).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
-                                                    public void onSuccess(Void unused) {
-
-                                                        Toast.makeText(ThemNV.this, "Đã thêm thành công", Toast.LENGTH_SHORT).show();
+                                                    public void onComplete(@NonNull Task<Void> task) {
                                                         finish();
                                                     }
                                                 });
                                             }
 
 
-                                        }
                                     }
 
                                     @Override
@@ -249,95 +240,5 @@ public class ThemNV extends AppCompatActivity {
             }
         });
 
-    }
-
-    public Boolean checkDate(String date) {
-        Boolean checkYear = false;
-        String[] parts = date.split("/");
-        int day = Integer.parseInt(parts[0]);
-        int month = Integer.parseInt(parts[1]);
-        int year = Integer.parseInt(parts[2]);
-        if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
-            checkYear = true;
-        switch (month) {
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                if (day > 31) {
-                    kt = true;
-                }
-                break;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                if (day > 30) {
-                    kt = true;
-                }
-                break;
-            case 2:
-                if (checkYear == true && day > 29) {
-                    kt = true;
-                }
-                if (checkYear == false && day > 28) {
-                    kt = true;
-                }
-                break;
-        }
-        kt = false;
-        return kt;
-    }
-
-    public interface checkCallBack {
-        void onResult(Boolean result);
-    }
-
-    public void checkMaNVForAccount(String maNV, checkCallBack checkCallBack) {
-
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Account");
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    String key = dataSnapshot.getRef().getKey();
-                    if (key.equals(maNV)) {
-                        kt = false;
-                        break;
-                    } else kt = true;
-                }
-                checkCallBack.onResult(kt);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    public void checkMaNVForThongTinNV(String maNV, checkCallBack checkCallBack) {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("thong tin nhan vien");
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    String key = dataSnapshot.getRef().getKey();
-                    if (key.equals(maNV)) {
-                        kt = true;
-                        break;
-                    } else kt = false;
-                }
-                checkCallBack.onResult(kt);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 }
