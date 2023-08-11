@@ -132,8 +132,6 @@ public class ThemNV extends AppCompatActivity {
                                 edtEmail.requestFocus();
                             } else {
 
-
-
                                 databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {

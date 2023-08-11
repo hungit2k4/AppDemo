@@ -8,7 +8,7 @@
     <CalendarView
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
 
     <View
         android:layout_width="match_parent"
@@ -79,12 +79,16 @@
             android:text="Nhập mã NV: " />
 
         <EditText
+            android:id="@+id/edtAddMaNvChamCong"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/shape_edt"
             android:hint="Nhập mã nv"
             android:padding="5dp"
+            android:focusable="false"
+            android:clickable="false"
+            android:cursorVisible="false"
             />
     </LinearLayout>
 
