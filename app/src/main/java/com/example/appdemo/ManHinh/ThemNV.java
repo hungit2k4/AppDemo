@@ -32,7 +32,7 @@ public class ThemNV extends AppCompatActivity {
     RadioButton rdoNam, rdoNu;
     Button btnHuy, btnLuuNV, btnChinhSuaNV;
     Boolean accept = false;
-    private String maNv, tenNv, ngaySinh, sDT, diaChi, email;
+    private String maNv, tenNv, ngaySinh, sDT, diaChi, email, neww;
     private Integer gioiTinh;
     public Boolean kt = false;
 
