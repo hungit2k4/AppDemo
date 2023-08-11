@@ -97,13 +97,52 @@ public class ThemNV extends AppCompatActivity {
                             String REGEX_BIRTDAY = "^(0[1-9]|[1-2]\\d|3[0-1])/(0[1-9]|1[0-2])/\\d{4}$";
                             String REGEX_PHONE_NUMBER = "(\\+?84|0)\\d{9,10}";
                             String REGEX_EMAIL = "^[A-Za-z0-9]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
-                            nhanVien = new NhanVien(maNv,tenNv,ngaySinh,gioiTinh,sDT,diaChi,email);
+                            if (maNv.isEmpty()) {
+                                edtMaNV.setError("Trống");
+                                edtMaNV.requestFocus();
+                            } else if (tenNv.isEmpty()) {
+                                edtTenNV2.setError("Trống");
+                                edtTenNV2.requestFocus();
+                            } else if (ngaySinh.isEmpty()) {
+                                edtNgaySinh.setError("Trống");
+                                edtNgaySinh.requestFocus();
+                            } else if (sDT.isEmpty()) {
+                                edtSoDT.setError("Trống");
+                                edtSoDT.requestFocus();
+                            } else if (diaChi.isEmpty()) {
+                                edtDiaChi.setError("Trống");
+                                edtDiaChi.requestFocus();
+                            } else if (email.isEmpty()) {
+                                edtEmail.setError("Trống");
+                                edtEmail.requestFocus();
+                            } else if (!maNv.matches(REGEX_MA_NV)) {
+                                edtMaNV.setError("Mã NV không hợp lệ");
+                                edtMaNV.requestFocus();
+                            } else if (!ngaySinh.matches(REGEX_BIRTDAY)) {
+                                edtNgaySinh.setError("Ngày sinh không đúng định dạng");
+                                edtNgaySinh.requestFocus();
+                            } else if (!sDT.matches(REGEX_PHONE_NUMBER)) {
+                                edtSoDT.setError("Số điện thoại không đúng");
+                                edtSoDT.requestFocus();
+                            } else if (!email.matches(REGEX_EMAIL)) {
+                                edtEmail.setError("Email không đúng định dạng");
+                                edtEmail.requestFocus();
+                            } else {
+                            nhanVien = new NhanVien(maNv, tenNv, ngaySinh, gioiTinh, sDT, diaChi, email);
+
                             databaseRef.child(maNVFromAdapter).setValue(nhanVien).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     finish();
                                 }
                             });
+                        }
+                        }
+                    });
+                    btnHuy.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finish();
                         }
                     });
                 }
@@ -291,6 +330,12 @@ public class ThemNV extends AppCompatActivity {
                         });
 
                     }
+                }
+            });
+            btnHuy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
                 }
             });
 
