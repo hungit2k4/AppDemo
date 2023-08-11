@@ -25,13 +25,14 @@ public class QuanLyNhanVien extends AppCompatActivity {
     ArrayList<NhanVien> list= new ArrayList<>();
     QuanLyNhanVienAdapter nhanVienAdapter;
     RecyclerView rcvNhanVien;
-    ImageView btnAdd;
+    ImageView btnAdd,btnBackQLNV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quan_ly_nhan_vien);
         rcvNhanVien= findViewById(R.id.rcvNhanvien);
         btnAdd= findViewById(R.id.btnAdd);
+        btnBackQLNV= findViewById(R.id.btnBackQLNV);
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("thong tin nhan vien");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -60,5 +61,12 @@ public class QuanLyNhanVien extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnBackQLNV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
+
 }

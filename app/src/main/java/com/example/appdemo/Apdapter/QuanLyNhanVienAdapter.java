@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appdemo.Holder.QuanLyNhanVienHolder;
+import com.example.appdemo.ManHinh.ThemNV;
 import com.example.appdemo.R;
 import com.example.appdemo.models.NhanVien;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -76,9 +77,10 @@ public class QuanLyNhanVienAdapter extends RecyclerView.Adapter<QuanLyNhanVienHo
         holder.btnEditNV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(v.getContext(), ThemNV.class);
-//                intent.putExtra("check","1");
-
+                Intent intent = new Intent(v.getContext(), ThemNV.class);
+                intent.putExtra("check",1);
+                intent.putExtra("manv",nhanVien.getMaNV());
+                v.getContext().startActivity(intent);
             }
         });
     }
