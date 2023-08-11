@@ -54,6 +54,7 @@ public class Fragment_Create_Account extends Fragment {
         rcView_Account = view.findViewById(R.id.rcView_Account);
         tv_showOrHide = view.findViewById(R.id.tv_showOrHide);
         linear_create_account = view.findViewById(R.id.linear_create_account);
+        linear_create_account.setVisibility(View.GONE);
 
         rcView_Account.setHasFixedSize(true);
         rcView_Account.setLayoutManager(new LinearLayoutManager(getContext()));

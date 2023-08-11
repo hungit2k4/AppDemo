@@ -1,10 +1,10 @@
 package com.example.appdemo.models;
 
 public class NhanVien {
-    private  String maNV,ten, ngaySinh,diaChi,email;
-    private Integer soDT, gioiTinh;
+    private  String maNV,ten, ngaySinh,diaChi,email, soDT;
+    private Integer  gioiTinh;
 
-    public NhanVien(String maNV, String ten, String ngaySinh, Integer gioiTinh, Integer soDT, String diaChi,String email) {
+    public NhanVien(String maNV, String ten, String ngaySinh, Integer gioiTinh, String soDT, String diaChi,String email) {
         this.maNV = maNV;
         this.ten = ten;
         this.ngaySinh = ngaySinh;
@@ -49,11 +49,11 @@ public class NhanVien {
         this.gioiTinh = gioiTinh;
     }
 
-    public Integer getSoDT() {
+    public String getSoDT() {
         return soDT;
     }
 
-    public void setSoDT(Integer soDT) {
+    public void setSoDT(String soDT) {
         this.soDT = soDT;
     }
 
