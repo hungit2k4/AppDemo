@@ -78,8 +78,9 @@ public class QuanLyNhanVienAdapter extends RecyclerView.Adapter<QuanLyNhanVienHo
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ThemNV.class);
-                intent.putExtra("check","1");
-
+                intent.putExtra("check",1);
+                intent.putExtra("manv",nhanVien.getMaNV());
+                v.getContext().startActivity(intent);
             }
         });
     }
