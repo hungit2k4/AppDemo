@@ -81,10 +81,12 @@ public class FragmentChat extends Fragment {
             public void onClick(View v) {
                 String nd= edtChat.getText().toString();
                 list.add(new TinNhan(LoginActivity.idGui,nd,LoginActivity.idNhan));
+                edtChat.setText("");
             DatabaseReference databaseReference =FirebaseDatabase.getInstance().getReference();
             databaseReference.child(child).setValue(list, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+
             }
         });
             }

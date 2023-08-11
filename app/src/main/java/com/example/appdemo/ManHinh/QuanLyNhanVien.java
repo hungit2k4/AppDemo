@@ -1,5 +1,6 @@
 package com.example.appdemo.ManHinh;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,11 @@ import android.widget.ImageView;
 import com.example.appdemo.Apdapter.QuanLyNhanVienAdapter;
 import com.example.appdemo.R;
 import com.example.appdemo.models.NhanVien;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -26,9 +32,26 @@ public class QuanLyNhanVien extends AppCompatActivity {
         setContentView(R.layout.activity_quan_ly_nhan_vien);
         rcvNhanVien= findViewById(R.id.rcvNhanvien);
         btnAdd= findViewById(R.id.btnAdd);
-        nhanVienAdapter = new QuanLyNhanVienAdapter(list,this);
+        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("thong tin nhan vien");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list= new ArrayList<>();
+                for (DataSnapshot x:snapshot.getChildren()){
+                    NhanVien nhanVien = x.getValue(NhanVien.class);
+                    list.add(nhanVien);
+                }
+                nhanVienAdapter.setListNhanVien(list);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        nhanVienAdapter = new QuanLyNhanVienAdapter(list,QuanLyNhanVien.this);
         rcvNhanVien.setAdapter(nhanVienAdapter);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(QuanLyNhanVien.this);
         rcvNhanVien.setLayoutManager(layoutManager);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
