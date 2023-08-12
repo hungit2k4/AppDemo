@@ -27,13 +27,18 @@ import com.example.appdemo.ManHinh.LoginActivity;
 import com.example.appdemo.ManHinh.Trang_Chu;
 import com.example.appdemo.R;
 
+import com.example.appdemo.models.Account;
 import com.example.appdemo.models.ImageAccount;
+import com.example.appdemo.models.NhanVien;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -52,9 +57,9 @@ public class FragmentProfile extends Fragment {
 
     Boolean check_Avatar_isClick = false;
     Boolean check_Background_isClick = false;
-    String user;
+    Boolean check=true;
     RelativeLayout parent_layout;
-
+    NhanVien nhanVien = new NhanVien();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -74,11 +79,39 @@ public class FragmentProfile extends Fragment {
         loading_avatar = view.findViewById(R.id.loading_avatar);
         loading_background = view.findViewById(R.id.loading_background);
 
-        Trang_Chu trang_chu = (Trang_Chu) getActivity();
+        String id=LoginActivity.idGui;
+        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("thong tin nhan vien");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-        tvId.setText(String.valueOf(Trang_Chu.id));
-        tvName.setText(Trang_Chu.inFullName);
-        tvEmail.setText("");
+                for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+
+                    String key= dataSnapshot.getRef().getKey();
+                    if (key.equals(id)){
+                       nhanVien = dataSnapshot.getValue(NhanVien.class);
+                       check=true;
+                       break;
+                    }
+                    else {
+                        check=false;
+                    }
+                }
+                if (check){
+                    tvId.setText(nhanVien.getMaNV());
+                    tvName.setText(nhanVien.getTen());
+                    tvEmail.setText(nhanVien.getEmail());
+                    tvPhone.setText(nhanVien.getSoDT());
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         if(Trang_Chu.key != null){
             Picasso.get().load(Trang_Chu.old_url_avatar).into(imgAvatar, new Callback() {

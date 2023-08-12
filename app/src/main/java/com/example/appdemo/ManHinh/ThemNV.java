@@ -38,6 +38,13 @@ public class ThemNV extends AppCompatActivity {
     private String maNv, tenNv, ngaySinh, sDT, diaChi, email;
     private Integer gioiTinh;
     private NhanVien nhanVien= new NhanVien();
+    Account account= new Account();
+    DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("thong tin nhan vien");
+    DatabaseReference databaseRefAcount = FirebaseDatabase.getInstance().getReference("Account");
+    String REGEX_MA_NV = "^nv\\d+";
+    String REGEX_BIRTDAY = "^(0[1-9]|[1-2]\\d|3[0-1])/(0[1-9]|1[0-2])/\\d{4}$";
+    String REGEX_PHONE_NUMBER = "(\\+?84|0)\\d{9,10}";
+    String REGEX_EMAIL = "^[A-Za-z0-9]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,8 +66,7 @@ public class ThemNV extends AppCompatActivity {
         Intent intent = getIntent();
         Integer c = intent.getIntExtra("check", 0);
         String maNVFromAdapter= intent.getStringExtra("manv");
-        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("thong tin nhan vien");
-        DatabaseReference databaseRefAcount = FirebaseDatabase.getInstance().getReference("Account");
+
         if (c == 1) {
         //sua thong tin
             databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -77,8 +83,8 @@ public class ThemNV extends AppCompatActivity {
                     edtMaNV.setText(maNVFromAdapter);
                     edtTenNV2.setText(nhanVien.getTen());
                     edtNgaySinh.setText(nhanVien.getNgaySinh());
-                    if (nhanVien.getGioiTinh()==1) rdoNam.isChecked();
-                    else rdoNu.isChecked();
+                    if (nhanVien.getGioiTinh()==1) rdoNam.setChecked(true);
+                    else rdoNu.setChecked(true);
                     edtSoDT.setText(nhanVien.getSoDT());
                     edtDiaChi.setText(nhanVien.getDiaChi());
                     edtEmail.setText(nhanVien.getEmail());
@@ -92,11 +98,6 @@ public class ThemNV extends AppCompatActivity {
                             diaChi = edtDiaChi.getText().toString();
                             email = edtEmail.getText().toString();
                             gioiTinh = (rdoNam.isChecked()) ? 1 : 0;
-
-                            String REGEX_MA_NV = "^nv\\d+";
-                            String REGEX_BIRTDAY = "^(0[1-9]|[1-2]\\d|3[0-1])/(0[1-9]|1[0-2])/\\d{4}$";
-                            String REGEX_PHONE_NUMBER = "(\\+?84|0)\\d{9,10}";
-                            String REGEX_EMAIL = "^[A-Za-z0-9]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
                             if (maNv.isEmpty()) {
                                 edtMaNV.setError("Trống");
                                 edtMaNV.requestFocus();
@@ -134,6 +135,7 @@ public class ThemNV extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     finish();
+                                    updateTenNV();
                                 }
                             });
                         }
@@ -165,13 +167,6 @@ public class ThemNV extends AppCompatActivity {
                     diaChi = edtDiaChi.getText().toString();
                     email = edtEmail.getText().toString();
                     gioiTinh = (rdoNam.isChecked()) ? 1 : 0;
-
-                    String REGEX_MA_NV = "^nv\\d+";
-                    String REGEX_BIRTDAY = "^(0[1-9]|[1-2]\\d|3[0-1])/(0[1-9]|1[0-2])/\\d{4}$";
-                    String REGEX_PHONE_NUMBER = "(\\+?84|0)\\d{9,10}";
-                    String REGEX_EMAIL = "^[A-Za-z0-9]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
-
-
                     databaseRefAcount.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -272,6 +267,7 @@ public class ThemNV extends AppCompatActivity {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
                                                         finish();
+                                                        updateTenNV();
                                                     }
                                                 });
                                             }
@@ -324,6 +320,7 @@ public class ThemNV extends AppCompatActivity {
                                         btnChinhSuaNV.setVisibility(View.GONE);
                                         Toast.makeText(ThemNV.this, "Đã chỉnh sửa thành công", Toast.LENGTH_SHORT).show();
                                         finish();
+                                        updateTenNV();
                                     }
                                 });
                             }
@@ -341,4 +338,30 @@ public class ThemNV extends AppCompatActivity {
 
         }
     }
+    public void updateTenNV(){
+        databaseRefAcount.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot :snapshot.getChildren()){
+                    String key= dataSnapshot.getRef().getKey();
+                    if (key.equals(maNv)){
+                        account = dataSnapshot.getValue(Account.class);
+                    }
+                }
+                account.setFullName(tenNv);
+                databaseRefAcount.child(maNv).setValue(account).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 }
