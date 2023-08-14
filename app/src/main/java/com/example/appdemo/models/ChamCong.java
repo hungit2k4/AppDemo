@@ -3,14 +3,14 @@ package com.example.appdemo.models;
 public class ChamCong {
 
     private String Manv;
-    private String ngayLam;
+    private int ngayLam;
     private String ngayNghi;
     private Double luong;
 
     public ChamCong() {
     }
 
-    public ChamCong(String manv, String ngayLam, String ngayNghi, Double luong) {
+    public ChamCong(String manv, int ngayLam, String ngayNghi, Double luong) {
         Manv = manv;
         this.ngayLam = ngayLam;
         this.ngayNghi = ngayNghi;
@@ -25,11 +25,11 @@ public class ChamCong {
         Manv = manv;
     }
 
-    public String getNgayLam() {
+    public int getNgayLam() {
         return ngayLam;
     }
 
-    public void setNgayLam(String ngayLam) {
+    public void setNgayLam(int ngayLam) {
         this.ngayLam = ngayLam;
     }
 

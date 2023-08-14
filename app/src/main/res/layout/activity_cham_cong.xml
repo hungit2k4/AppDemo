@@ -8,7 +8,7 @@
     <CalendarView
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="310dp"/>
 
     <View
         android:layout_width="match_parent"
@@ -32,12 +32,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Số ngày làm" />
+                android:text="Số ngày làm"
+                android:textStyle="bold"
+                android:textColor="@color/blue"
+                android:textSize="16sp"/>
 
             <TextView
+                android:id="@+id/tvNgayLam"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="30 ngày" />
+                android:text="0 ngày"
+                android:textSize="16sp"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -52,12 +58,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Số ngày nghỉ" />
+                android:text="Số ngày nghỉ"
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                android:textSize="16sp"/>
 
             <TextView
+                android:id="@+id/tvNgayNghi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0 ngày" />
+                android:text="0 ngày"
+                android:textSize="16sp"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -66,6 +77,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/black" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -76,7 +88,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nhập mã NV: " />
+            android:text="Nhập mã NV: "
+            android:textSize="15sp"
+            android:textStyle="bold"/>
 
         <EditText
             android:id="@+id/edtAddMaNvChamCong"
