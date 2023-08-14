@@ -29,7 +29,7 @@
             android:exported="true">
 
         </activity>
-        <activity android:name=".ManHinh.ChamCong"
+        <activity android:name=".ManHinh.ActivityChamCong"
             android:exported="true"
             >
 

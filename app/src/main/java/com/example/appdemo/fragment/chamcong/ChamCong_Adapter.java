@@ -15,12 +15,12 @@ import com.example.appdemo.models.ChamCong;
 
 import java.util.ArrayList;
 
-public class Firebase_ChamCong_Adapter extends RecyclerView.Adapter<Firebase_ChamCong_Adapter.ViewHolder> {
+public class ChamCong_Adapter extends RecyclerView.Adapter<ChamCong_Adapter.ViewHolder> {
 
     ArrayList<ChamCong> list;
     Context context;
 
-    public Firebase_ChamCong_Adapter(ArrayList<ChamCong> list, Context context) {
+    public ChamCong_Adapter(ArrayList<ChamCong> list, Context context) {
         this.list = list;
         this.context = context;
     }
