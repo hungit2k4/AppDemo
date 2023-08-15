@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -148,16 +150,31 @@ public class Trang_Chu extends AppCompatActivity {
         imageAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Trang_Chu.this, Infor_account.class);
-                startActivity(intent);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(Trang_Chu.this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+                v = LayoutInflater.from(Trang_Chu.this).inflate(R.layout.layout_view_image, null);
+                builder.setView(v);
+
+                ImageView imageView = v.findViewById(R.id.imageView);
+                TextView tvClose = v.findViewById(R.id.tvClose);
+
+                Picasso.get().load(old_url_avatar).into(imageView);
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+                tvClose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        alertDialog.dismiss();
+                    }
+                });
             }
         });
 
         btnThongBao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Trang_Chu.this, Infor_account.class);
-                startActivity(intent);
+
             }
         });
     }

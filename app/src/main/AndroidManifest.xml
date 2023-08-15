@@ -35,7 +35,7 @@
             android:exported="true">
 
         </activity>
-        <activity android:name=".ManHinh.ChamCong"
+        <activity android:name=".ManHinh.Fragment_ChamCong"
             android:exported="true"
             >
 

@@ -46,29 +46,41 @@ public class FirebaseAdapterAccount extends FirebaseRecyclerAdapter<Account, Fir
 
                 String userName = holder.user_account.getText().toString();
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                builder.setTitle("Xác nhận");
-                builder.setMessage("Bạn có chắc chắn xóa tài khoản: " + userName);
 
-                builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Fragment_Create_Account.databaseRef.child(userName).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(v.getContext(), "Đã xóa tài khoản", Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
-                            }
-                        });
-                    }
-                });
+                if(userName.equals("admin") || userName.equals("admin2")){
+                    builder.setTitle("Thông báo");
+                    builder.setMessage("Bạn không thể xóa tài khoản này");
+                    builder.setPositiveButton("Đã hiểu", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                }else {
+                    builder.setTitle("Xác nhận");
+                    builder.setMessage("Bạn có chắc chắn xóa tài khoản: " + userName);
 
-                builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+                    builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Fragment_Create_Account.databaseRef.child(userName).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(v.getContext(), "Đã xóa tài khoản", Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+                                }
+                            });
+                        }
+                    });
 
-                    }
-                });
+                    builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+
+                        }
+                    });
+                }
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
             }
