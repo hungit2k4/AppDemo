@@ -19,7 +19,6 @@ import java.util.ArrayList;
 public class ChatAdapter extends RecyclerView.Adapter<ChatHolder> {
     ArrayList<TinNhan> list;
     Context c;
-
     public ChatAdapter(ArrayList<TinNhan> list, Context c) {
         this.list = list;
         this.c = c;

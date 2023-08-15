@@ -9,6 +9,7 @@
     tools:context=".ManHinh.InputCodeActivity">
 
     <ImageButton
+        android:id="@+id/btnBackForgot"
         android:layout_width="38dp"
         android:layout_height="38dp"
         android:layout_marginTop="37dp"

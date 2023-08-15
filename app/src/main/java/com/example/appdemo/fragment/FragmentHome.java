@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.appdemo.Apdapter.QuanLyNhanVienAdapter;
+import com.example.appdemo.ManHinh.DangKyNghi;
 import com.example.appdemo.ManHinh.Fragment_ChamCong;
 import com.example.appdemo.ManHinh.Infor_account;
 import com.example.appdemo.ManHinh.LoginActivity;
@@ -68,7 +69,8 @@ public class FragmentHome extends Fragment {
         btnDKNghi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+            Intent intent = new Intent(getContext(), DangKyNghi.class);
+            startActivity(intent);
             }
         });
         btnDoiMK.setOnClickListener(new View.OnClickListener() {

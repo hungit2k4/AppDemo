@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,9 +27,8 @@ public class ForgotPass extends AppCompatActivity {
 
     private EditText edtStaffId, edtUserForgot;
     private Button btnSend;
+    private ImageButton ibtnBack;
     private String key = null;
-
-    StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,13 @@ public class ForgotPass extends AppCompatActivity {
         edtStaffId = findViewById(R.id.edtStaffId);
         edtUserForgot = findViewById(R.id.edtUserForgot);
         btnSend = findViewById(R.id.btnSend);
-
+        ibtnBack = findViewById(R.id.ibtnBack);
+        ibtnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("Account");
 
         btnSend.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +111,6 @@ public class ForgotPass extends AppCompatActivity {
                                 edtUserForgot.requestFocus();
                             }
                         }
-
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
                             Log.e("Error", "Error: " + error.getMessage());

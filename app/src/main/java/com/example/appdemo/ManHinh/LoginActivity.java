@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin, btnForgotPass;
     private LottieAnimationView loading_login;
     String key = null;
-
+    public static Account account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                                             loading_login.setVisibility(View.GONE);
                                         }
 
-                                        Account account = new Account();
+                                        account = new Account();
                                         account = snapshot.getValue(Account.class);
 
                                         String name = account.getFullName();

@@ -13,6 +13,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,7 +31,7 @@ public class InputCodeActivity extends AppCompatActivity {
 
     EditText edtNumOne, edtNumTwo, edtNumThree, edtNumFour;
     Button btnSubmit, btnResendCode;
-
+    ImageButton btnBackForgot;
     String otp1;
     String otp2;
     String otp3;
@@ -48,7 +49,13 @@ public class InputCodeActivity extends AppCompatActivity {
 
         btnSubmit = findViewById(R.id.btnSubmit);
         btnResendCode = findViewById(R.id.btnResendCode);
-
+        btnBackForgot = findViewById(R.id.btnBackForgot);
+        btnBackForgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         Intent intent = getIntent();
         int id = intent.getIntExtra("id", -1);
         String key = intent.getStringExtra("key");
