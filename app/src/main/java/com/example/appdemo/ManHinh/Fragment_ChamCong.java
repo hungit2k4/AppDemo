@@ -130,11 +130,15 @@ public class Fragment_ChamCong extends Fragment {
                                         }
                                     });
                                     holder.tvMaNV.setText(maNV);
-
+                                    if (LoginActivity.idGui.matches(REGEX_MA_NV)){
+                                       holder.btnDelete.setVisibility(View.GONE);
+                                    }
                                     holder.itemView.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-
+                                            if (LoginActivity.idGui.matches(REGEX_MA_NV)){
+                                               return;
+                                            }
                                             databaseRef_ngayCong.child(holder.tvMaNV.getText().toString()).addValueEventListener(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
