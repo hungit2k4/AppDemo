@@ -12,11 +12,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.appdemo.R;
+import com.example.appdemo.models.ChamCong;
 import com.example.appdemo.models.XinNghi;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -47,6 +51,9 @@ public class DangKyNghi extends AppCompatActivity {
         client = new OkHttpClient();
         dateFormatter = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
 
+        DatabaseReference databaseRef_ThongBao = FirebaseDatabase.getInstance().getReference("Thông báo");
+        DatabaseReference databaseRef_NgayCong = FirebaseDatabase.getInstance().getReference("Ngày công");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("đăng ký nghỉ");
 
         btn_DangKy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,11 +70,33 @@ public class DangKyNghi extends AppCompatActivity {
                     Toast.makeText(DangKyNghi.this, "Ngày bắt đầu or kết thúc không hợp lệ", Toast.LENGTH_SHORT).show();
                 } else {
                     XinNghi xinNghi= new XinNghi(LoginActivity.idGui,liDo,dateStart,dateEnd);
-                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("đăng ký nghỉ");
-                    databaseReference.child(LoginActivity.idGui).setValue(xinNghi).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                    databaseReference.child(LoginActivity.idGui).setValue(xinNghi);
+
+                    databaseRef_NgayCong.child(LoginActivity.idGui).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            Toast.makeText(DangKyNghi.this, "Thành công", Toast.LENGTH_SHORT).show();
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                            ChamCong chamCong = new ChamCong();
+
+                            if(snapshot.hasChild("ngayNghi")){
+                                chamCong = snapshot.getValue(ChamCong.class);
+
+                                chamCong.setNgayLam(chamCong.getNgayLam());
+                                if(chamCong.getNgayNghi() == 0){
+                                    chamCong.setNgayNghi(1);
+                                }else {
+                                    chamCong.setNgayNghi(chamCong.getNgayNghi() + 1);
+                                }
+                            }
+
+                            databaseRef_NgayCong.child(LoginActivity.idGui).setValue(chamCong);
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
                         }
                     });
                 }

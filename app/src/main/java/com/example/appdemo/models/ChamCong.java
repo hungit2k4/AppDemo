@@ -4,13 +4,13 @@ public class ChamCong {
 
     private String Manv;
     private int ngayLam;
-    private String ngayNghi;
+    private int ngayNghi;
     private Double luong;
 
     public ChamCong() {
     }
 
-    public ChamCong(String manv, int ngayLam, String ngayNghi, Double luong) {
+    public ChamCong(String manv, int ngayLam, int ngayNghi, Double luong) {
         Manv = manv;
         this.ngayLam = ngayLam;
         this.ngayNghi = ngayNghi;
@@ -33,11 +33,11 @@ public class ChamCong {
         this.ngayLam = ngayLam;
     }
 
-    public String getNgayNghi() {
+    public int getNgayNghi() {
         return ngayNghi;
     }
 
-    public void setNgayNghi(String ngayNghi) {
+    public void setNgayNghi(int ngayNghi) {
         this.ngayNghi = ngayNghi;
     }
 
