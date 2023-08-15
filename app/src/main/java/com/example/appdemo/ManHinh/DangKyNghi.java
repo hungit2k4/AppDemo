@@ -79,14 +79,16 @@ public class DangKyNghi extends AppCompatActivity {
 
                             ChamCong chamCong = new ChamCong();
 
+                            int total = dayOfMonthe - dayOfMonths;
+
                             if(snapshot.hasChild("ngayNghi")){
                                 chamCong = snapshot.getValue(ChamCong.class);
 
                                 chamCong.setNgayLam(chamCong.getNgayLam());
                                 if(chamCong.getNgayNghi() == 0){
-                                    chamCong.setNgayNghi(1);
+                                    chamCong.setNgayNghi(total);
                                 }else {
-                                    chamCong.setNgayNghi(chamCong.getNgayNghi() + 1);
+                                    chamCong.setNgayNghi(chamCong.getNgayNghi() + total);
                                 }
                             }
 
