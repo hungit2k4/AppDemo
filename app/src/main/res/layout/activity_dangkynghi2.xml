@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#0091FF">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_arrow_back_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Đăng ký nghỉ"
+                android:textColor="#ffffff"
+                android:textSize="30sp" />
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lý do xin nghỉ"
+        android:textSize="25sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp" />
+
+    <EditText
+        android:id="@+id/reasonEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:hint="Nhập lý do của bạn..."
+        android:inputType="textMultiLine"
+        android:minLines="2"
+        android:maxLines="8"
+        android:textSize="25sp"/>
+
+    <TextView
+        android:id="@+id/startDateTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="Chọn ngày bắt đầu"
+        android:clickable="true"
+        android:focusable="false"
+        android:textSize="25sp"
+        android:onClick="showStartDatePicker" />
+    <TextView
+        android:id="@+id/endDateTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="Chọn ngày kết thúc"
+        android:clickable="true"
+        android:focusable="false"
+        android:onClick="showEndDatePicker"
+        android:textSize="25sp"/>
+
+    <Button
+        android:id="@+id/btn_DangKy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="onSubmitClicked"
+        android:text="Đăng ký nghỉ"
+        android:textSize="25sp"
+        android:backgroundTint="#0091FF"/>
+</LinearLayout>

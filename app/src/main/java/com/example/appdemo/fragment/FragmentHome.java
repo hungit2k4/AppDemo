@@ -17,11 +17,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.appdemo.Apdapter.QuanLyNhanVienAdapter;
+import com.example.appdemo.ManHinh.InputCodeActivity;
 import com.example.appdemo.ManHinh.LoginActivity;
 import com.example.appdemo.ManHinh.QuanLyNhanVien;
 import com.example.appdemo.ManHinh.Trang_Chu;
 import com.example.appdemo.R;
 import com.example.appdemo.fragment.create_account.Fragment_Create_Account;
+import com.example.appdemo.models.Account;
 
 import java.util.ArrayList;
 
@@ -66,7 +68,13 @@ public class FragmentHome extends Fragment {
         btnDoiMK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(), InputCodeActivity.class);
+                Account account= LoginActivity.account;
+                intent.putExtra("key", account.getUsername());
+                intent.putExtra("fullName", account.getFullName());
+                intent.putExtra("user", account.getUsername());
+                intent.putExtra("pass", account.getPassword());
+                startActivity(intent);
             }
         });
         btnCapTk.setOnClickListener(new View.OnClickListener() {

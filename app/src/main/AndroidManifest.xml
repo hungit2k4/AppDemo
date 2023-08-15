@@ -16,7 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppDemo"
         tools:targetApi="31">
+        <activity android:name=".ManHinh.DangKyNghi"
+            android:exported="true">
 
+        </activity>
         <activity
             android:name=".UpImage"
             android:exported="false" />
@@ -25,7 +28,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
