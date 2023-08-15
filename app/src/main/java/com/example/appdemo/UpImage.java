@@ -9,6 +9,6 @@ public class UpImage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_up_image);
+        setContentView(R.layout.dialog_up_image);
     }
 }

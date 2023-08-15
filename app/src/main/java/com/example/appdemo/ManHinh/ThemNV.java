@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.appdemo.R;
@@ -31,13 +32,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ThemNV extends AppCompatActivity {
-    EditText edtMaNV, edtTenNV2, edtNgaySinh, edtSoDT, edtDiaChi, edtEmail;
-    RadioButton rdoNam, rdoNu;
-    Button btnHuy, btnLuuNV, btnChinhSuaNV;
-    Boolean accept = false;
+    private EditText edtMaNV, edtTenNV2, edtNgaySinh, edtSoDT, edtDiaChi, edtEmail;
+    private RadioButton rdoNam, rdoNu;
+    private Button btnHuy, btnLuuNV, btnChinhSuaNV;
+    private Boolean accept = false;
     private String maNv, tenNv, ngaySinh, sDT, diaChi, email;
     private Integer gioiTinh;
     private NhanVien nhanVien= new NhanVien();
+    private TextView tvTitle;
     Account account= new Account();
     DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("thong tin nhan vien");
     DatabaseReference databaseRefAcount = FirebaseDatabase.getInstance().getReference("Account");
@@ -56,6 +58,7 @@ public class ThemNV extends AppCompatActivity {
         edtSoDT = findViewById(R.id.edtSoDT);
         edtDiaChi = findViewById(R.id.edtDiaChi);
         edtEmail = findViewById(R.id.edtEmail);
+        tvTitle = findViewById(R.id.tvTitle);
 
         rdoNam = findViewById(R.id.rdoNam);
         rdoNu = findViewById(R.id.rdoNu);
@@ -69,6 +72,8 @@ public class ThemNV extends AppCompatActivity {
 
         if (c == 1) {
         //sua thong tin
+
+            tvTitle.setText("Thay đổi thông tin nhân viên");
             databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {

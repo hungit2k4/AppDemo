@@ -13,7 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,10 +26,10 @@ import androidx.fragment.app.Fragment;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.appdemo.ManHinh.LoginActivity;
+import com.example.appdemo.ManHinh.ThemNV;
 import com.example.appdemo.ManHinh.Trang_Chu;
 import com.example.appdemo.R;
 
-import com.example.appdemo.models.Account;
 import com.example.appdemo.models.ImageAccount;
 import com.example.appdemo.models.NhanVien;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -54,6 +56,9 @@ public class FragmentProfile extends Fragment {
     private final int PICK_IMAGE_REQUEST = 1;
     private Uri uri_Image;
     private String url_Image;
+    String maNv, tenNv, ngaySinh, sDT, diaChi, email;
+    private Integer gioiTinh;
+    private DatabaseReference databaseReference;
 
     Boolean check_Avatar_isClick = false;
     Boolean check_Background_isClick = false;
@@ -80,7 +85,7 @@ public class FragmentProfile extends Fragment {
         loading_background = view.findViewById(R.id.loading_background);
 
         String id=LoginActivity.idGui;
-        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("thong tin nhan vien");
+        databaseReference = FirebaseDatabase.getInstance().getReference("thong tin nhan vien");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -97,7 +102,17 @@ public class FragmentProfile extends Fragment {
                         check=false;
                     }
                 }
+
                 if (check){
+
+                    maNv = nhanVien.getMaNV();
+                    tenNv = nhanVien.getTen();
+                    ngaySinh = nhanVien.getNgaySinh();
+                    sDT = nhanVien.getSoDT();
+                    diaChi = nhanVien.getDiaChi();
+                    email = nhanVien.getEmail();
+                    gioiTinh = nhanVien.getGioiTinh();
+
                     tvId.setText(nhanVien.getMaNV());
                     tvName.setText(nhanVien.getTen());
                     tvEmail.setText(nhanVien.getEmail());
@@ -114,6 +129,8 @@ public class FragmentProfile extends Fragment {
 
 
         if(Trang_Chu.key != null){
+
+
             Picasso.get().load(Trang_Chu.old_url_avatar).into(imgAvatar, new Callback() {
                 @Override
                 public void onSuccess() {
@@ -129,6 +146,7 @@ public class FragmentProfile extends Fragment {
 
                 }
             });
+
             Picasso.get().load(Trang_Chu.old_url_background).into(imgBackground, new Callback() {
                 @Override
                 public void onSuccess() {
@@ -148,10 +166,12 @@ public class FragmentProfile extends Fragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         LayoutInflater layoutInflater = ((Activity) getContext()).getLayoutInflater();
-        View v = layoutInflater.inflate(R.layout.activity_up_image, container, false);
+        View v = layoutInflater.inflate(R.layout.dialog_up_image, container, false);
         builder.setView(v);
 
         Button btnChooseImage = v.findViewById(R.id.btnChooseImage);
+        Button btnViewImage = v.findViewById(R.id.btnViewImage);
+
         AlertDialog alertDialog = builder.create();
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -250,12 +270,6 @@ public class FragmentProfile extends Fragment {
                                         databaseRef.child(Trang_Chu.user).setValue(imageAccount);
 
                                         Toast.makeText(getContext(), "Tải ảnh lên thành công", Toast.LENGTH_SHORT).show();
-//                                        requireActivity().getSupportFragmentManager()
-//                                                        .beginTransaction().replace(
-//                                                                R.id.frLayout, new FragmentProfile()
-//                                                ).commit();
-//                                        BottomNavigationView bottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation);
-//                                        bottomNavigationView.setSelectedItemId(R.id.bottom_profile);
                                         btnOkProfile.setVisibility(View.GONE);
                                         btnEditProfile.setVisibility(View.VISIBLE);
                                         btnLogout.setVisibility(View.VISIBLE);
@@ -273,6 +287,18 @@ public class FragmentProfile extends Fragment {
                     }
 
                 }
+
+            }
+        });
+
+        btnEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               Intent intent = new Intent(getActivity(), ThemNV.class);
+               intent.putExtra("check", 1);
+               intent.putExtra("manv", maNv);
+               startActivity(intent);
 
             }
         });
@@ -304,6 +330,42 @@ public class FragmentProfile extends Fragment {
             }
         });
 
+
+        btnViewImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+                v = LayoutInflater.from(getContext()).inflate(R.layout.layout_view_image, null);
+                builder.setView(v);
+
+                ImageView imageView = v.findViewById(R.id.imageView);
+                TextView tvClose = v.findViewById(R.id.tvClose);
+
+                if(check_Avatar_isClick ){
+                    Picasso.get().load(Trang_Chu.old_url_avatar).into(imageView);
+                } else if (check_Background_isClick) {
+                    Picasso.get().load(Trang_Chu.old_url_background).into(imageView);
+                }
+                AlertDialog alertDialogViewImg = builder.create();
+                alertDialogViewImg.show();
+                tvClose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialogViewImg.dismiss();
+                        alertDialog.dismiss();
+                        check_Avatar_isClick = false;
+                        check_Background_isClick = false;
+                        btnOkProfile.setVisibility(View.GONE);
+                        btnLogout.setVisibility(View.VISIBLE);
+                        btnEditProfile.setVisibility(View.VISIBLE);
+                    }
+                });
+
+
+            }
+        });
+
         return view;
     }
 
@@ -320,6 +382,4 @@ public class FragmentProfile extends Fragment {
             }
             }
         }
-
-
     }

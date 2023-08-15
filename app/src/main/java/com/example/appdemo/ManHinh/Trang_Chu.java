@@ -159,6 +159,7 @@ public class Trang_Chu extends AppCompatActivity {
                 TextView tvClose = v.findViewById(R.id.tvClose);
 
                 Picasso.get().load(old_url_avatar).into(imageView);
+
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
                 tvClose.setOnClickListener(new View.OnClickListener() {
