@@ -5,6 +5,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <ImageView
+        android:id="@+id/ibtnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_arrow_back_ios_24"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"/>
+
     <CalendarView
         android:id="@+id/calendarView"
         android:layout_width="match_parent"

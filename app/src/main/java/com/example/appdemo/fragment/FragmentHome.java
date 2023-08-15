@@ -17,6 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.appdemo.Apdapter.QuanLyNhanVienAdapter;
+import com.example.appdemo.ManHinh.Fragment_ChamCong;
+import com.example.appdemo.ManHinh.Infor_account;
 import com.example.appdemo.ManHinh.LoginActivity;
 import com.example.appdemo.ManHinh.QuanLyNhanVien;
 import com.example.appdemo.ManHinh.Trang_Chu;
@@ -48,13 +50,19 @@ public class FragmentHome extends Fragment {
         btnCaNhan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(), Infor_account.class);
+                startActivity(intent);
             }
         });
         btnChamCong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Fragment fragment = new Fragment_ChamCong();
 
+                Trang_Chu.rltWelcome.setVisibility(View.GONE);
+
+                getActivity().getSupportFragmentManager().beginTransaction().
+                        replace(R.id.frLayout, fragment).addToBackStack(null).commit();
             }
         });
         btnDKNghi.setOnClickListener(new View.OnClickListener() {

@@ -1,6 +1,7 @@
 package com.example.appdemo.ManHinh;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,13 +14,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.appdemo.R;
+import com.example.appdemo.fragment.FragmentHome;
 import com.example.appdemo.fragment.chamcong.ChamCong_Adapter;
 import com.example.appdemo.models.ChamCong;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -34,7 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-public class ActivityChamCong extends AppCompatActivity {
+public class Fragment_ChamCong extends Fragment {
 
     private CalendarView calendarView;
 
@@ -47,30 +51,40 @@ public class ActivityChamCong extends AppCompatActivity {
     private String datekey, maNV;
     private DatabaseReference databaseRef_chamCong, databaseRef_ngayCong, databaseRef_getId;
     public TextView tvNgayLam, tvNgayNghi;
-    ChamCong_Adapter.ViewHolder viewHolder;
+    private ImageView ibtnBack;
 
     private int ngay, thang, nam;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cham_cong);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_cham_cong, container, false);
 
-        calendarView = findViewById(R.id.calendarView);
-        btnAddChamCong = findViewById(R.id.btnAddChamCong);
-        rcChamCong = findViewById(R.id.rcChamCong);
-        edtAddMaNvChamCong = findViewById(R.id.edtAddMaNvChamCong);
-        tvNgayLam = findViewById(R.id.tvNgayLam);
-        tvNgayNghi = findViewById(R.id.tvNgayNghi);
+        calendarView = view.findViewById(R.id.calendarView);
+        btnAddChamCong = view.findViewById(R.id.btnAddChamCong);
+        rcChamCong = view.findViewById(R.id.rcChamCong);
+        edtAddMaNvChamCong = view.findViewById(R.id.edtAddMaNvChamCong);
+        tvNgayLam = view.findViewById(R.id.tvNgayLam);
+        tvNgayNghi = view.findViewById(R.id.tvNgayNghi);
+        ibtnBack = view.findViewById(R.id.ibtnBack);
 
         rcChamCong.setHasFixedSize(true);
-        rcChamCong.setLayoutManager(new LinearLayoutManager(ActivityChamCong.this));
+        rcChamCong.setLayoutManager(new LinearLayoutManager(getContext()));
 
         listKey = new ArrayList<>();
 
 
         databaseRef_ngayCong = FirebaseDatabase.getInstance().getReference("Ngày công");
         databaseRef_getId = FirebaseDatabase.getInstance().getReference("thong tin nhan vien");
+
+        ibtnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new FragmentHome();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frLayout, fragment).commit();
+                Trang_Chu.rltWelcome.setVisibility(View.VISIBLE);
+            }
+        });
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -222,7 +236,7 @@ public class ActivityChamCong extends AppCompatActivity {
                 }
 
 
-                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(ActivityChamCong.this);
+                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
                 builder.setTitle("Chọn Id Nhận Viên");
                 builder.setItems(key, new DialogInterface.OnClickListener() {
                     @Override
@@ -248,7 +262,7 @@ public class ActivityChamCong extends AppCompatActivity {
                 } else {
 
                     if (ngay == 0 && thang == 0 && nam == 0) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(ActivityChamCong.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         builder.setTitle("Thông báo");
                         builder.setMessage("Vui lòng chọn ngày");
                         builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
@@ -272,7 +286,7 @@ public class ActivityChamCong extends AppCompatActivity {
                                     String manv = snapshot.child("manv").getValue().toString();
 
                                     if(maNV.equals(manv)){
-                                        AlertDialog.Builder builder = new AlertDialog.Builder(ActivityChamCong.this);
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                                         builder.setTitle("Thông báo");
                                         builder.setMessage("Nhân viên đã được chấm công cho ngày hôm nay từ trước đó!");
                                         builder.setPositiveButton("Đã hiểu", new DialogInterface.OnClickListener() {
@@ -331,8 +345,9 @@ public class ActivityChamCong extends AppCompatActivity {
         });
 
 
+
+
+        return view;
     }
-
-
 }
 
