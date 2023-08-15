@@ -72,7 +72,6 @@
         <activity
             android:name=".ManHinh.QuanLyNhanVien"
             android:exported="true" >
-
         </activity>
     </application>
 
