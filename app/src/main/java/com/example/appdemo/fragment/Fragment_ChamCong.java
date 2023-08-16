@@ -1,4 +1,4 @@
-package com.example.appdemo.ManHinh;
+package com.example.appdemo.fragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +23,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.appdemo.ManHinh.LoginActivity;
+import com.example.appdemo.ManHinh.Trang_Chu;
 import com.example.appdemo.R;
 import com.example.appdemo.fragment.FragmentHome;
 import com.example.appdemo.fragment.chamcong.ChamCong_Adapter;

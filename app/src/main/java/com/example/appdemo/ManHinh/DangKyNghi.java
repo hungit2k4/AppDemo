@@ -35,6 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import okhttp3.OkHttpClient;
@@ -305,6 +306,8 @@ public class DangKyNghi extends AppCompatActivity {
     }
 
     public void showStartDatePicker(View view) {
+        Date date= new Date();
+        String date_now= dateFormatter.format(date);
         final Calendar calendar = Calendar.getInstance();
 
         years = calendar.get(Calendar.YEAR);

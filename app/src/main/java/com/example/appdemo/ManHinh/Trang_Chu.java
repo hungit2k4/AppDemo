@@ -17,7 +17,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.appdemo.ThongBao;
 import com.example.appdemo.fragment.FragmentChat;
 import com.example.appdemo.fragment.FragmentHome;
 import com.example.appdemo.R;

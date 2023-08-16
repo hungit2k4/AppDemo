@@ -1,4 +1,4 @@
-package com.example.appdemo;
+package com.example.appdemo.ManHinh;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.appdemo.Apdapter.NotifyAdapter;
+import com.example.appdemo.R;
 import com.example.appdemo.models.Notify;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
