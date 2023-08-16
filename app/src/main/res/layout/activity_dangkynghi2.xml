@@ -31,53 +31,67 @@
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lý do xin nghỉ"
-        android:textSize="25sp"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp" />
-
-    <EditText
-        android:id="@+id/reasonEditText"
+    <LinearLayout
+        android:id="@+id/lyOffNV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:hint="Nhập lý do của bạn..."
-        android:inputType="textMultiLine"
-        android:minLines="2"
-        android:maxLines="8"
-        android:textSize="25sp"/>
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lý do xin nghỉ"
+            android:textSize="25sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp" />
 
-    <TextView
-        android:id="@+id/startDateTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:hint="Chọn ngày bắt đầu"
-        android:clickable="true"
-        android:focusable="false"
-        android:textSize="25sp"
-        android:onClick="showStartDatePicker" />
-    <TextView
-        android:id="@+id/endDateTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:hint="Chọn ngày kết thúc"
-        android:clickable="true"
-        android:focusable="false"
-        android:onClick="showEndDatePicker"
-        android:textSize="25sp"/>
+        <EditText
+            android:id="@+id/reasonEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:hint="Nhập lý do của bạn..."
+            android:inputType="textMultiLine"
+            android:minLines="2"
+            android:maxLines="8"
+            android:textSize="25sp"/>
 
-    <Button
-        android:id="@+id/btn_DangKy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:onClick="onSubmitClicked"
-        android:text="Đăng ký nghỉ"
-        android:textSize="25sp"
-        android:backgroundTint="#0091FF"/>
+        <TextView
+            android:id="@+id/startDateTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:hint="Chọn ngày bắt đầu"
+            android:clickable="true"
+            android:focusable="false"
+            android:textSize="25sp"
+            android:onClick="showStartDatePicker" />
+        <TextView
+            android:id="@+id/endDateTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:hint="Chọn ngày kết thúc"
+            android:clickable="true"
+            android:focusable="false"
+            android:onClick="showEndDatePicker"
+            android:textSize="25sp"/>
+
+        <Button
+            android:id="@+id/btn_DangKy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="onSubmitClicked"
+            android:text="Đăng ký nghỉ"
+            android:textSize="25sp"
+            android:backgroundTint="#0091FF"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcDangKiNghi"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
 </LinearLayout>

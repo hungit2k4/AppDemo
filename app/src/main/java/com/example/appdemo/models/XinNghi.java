@@ -1,13 +1,17 @@
 package com.example.appdemo.models;
 
 public class XinNghi {
-    String maNV,liDo,dateStart, dateEnd ;
+    String maNV,liDo,dateStart, dateEnd , status;
 
-    public XinNghi(String maNV, String liDo, String dateStart, String dateEnd) {
+    public XinNghi() {
+    }
+
+    public XinNghi(String maNV, String liDo, String dateStart, String dateEnd, String status) {
         this.maNV = maNV;
         this.liDo = liDo;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
+        this.status = status;
     }
 
     public String getMaNV() {
@@ -40,5 +44,13 @@ public class XinNghi {
 
     public void setDateEnd(String dateEnd) {
         this.dateEnd = dateEnd;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

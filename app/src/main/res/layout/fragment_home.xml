@@ -64,6 +64,7 @@
                 android:textSize="18dp" />
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/cNNhanVien"
         android:layout_width="match_parent"
@@ -95,6 +96,7 @@
                 android:text="Đăng ký nghỉ"
                 android:textSize="18dp"/>
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/btnDoiMK"
             android:layout_width="0dp"

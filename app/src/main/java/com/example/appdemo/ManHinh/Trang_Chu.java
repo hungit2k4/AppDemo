@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.appdemo.ThongBao;
 import com.example.appdemo.fragment.FragmentChat;
 import com.example.appdemo.fragment.FragmentHome;
 import com.example.appdemo.R;
@@ -105,7 +106,7 @@ public class Trang_Chu extends AppCompatActivity {
                             }
                         });
 
-                        tvHello.setText("Xin chào, "+inFullName);
+                        tvHello.setText("Xin chào, " + inFullName);
 
                     }
 
@@ -129,18 +130,22 @@ public class Trang_Chu extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragmentBottom = null;
-                    if (item.getItemId() == R.id.bottom_home) {
-                        item.setTitle("Home");
-                        rltWelcome.setVisibility(View.VISIBLE);
-                        fragmentBottom = new FragmentHome();
+                if (item.getItemId() == R.id.bottom_home) {
+                    item.setTitle("Home");
+                    rltWelcome.setVisibility(View.VISIBLE);
+                    fragmentBottom = new FragmentHome();
                 } else if (item.getItemId() == R.id.mChat) {
-                        item.setTitle("Chat");
-                        rltWelcome.setVisibility(View.GONE);
+                    item.setTitle("Chat");
+                    rltWelcome.setVisibility(View.GONE);
                     fragmentBottom = new FragmentChat();
                 } else if (item.getItemId() == R.id.bottom_profile) {
-                        item.setTitle("Profile");
-                        rltWelcome.setVisibility(View.GONE);
+                    item.setTitle("Profile");
+                    rltWelcome.setVisibility(View.GONE);
                     fragmentBottom = new FragmentProfile();
+                } else {
+                    item.setTitle("Notify");
+                    rltWelcome.setVisibility(View.GONE);
+                    fragmentBottom = new ThongBao();
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.frLayout, fragmentBottom).commit();
                 return true;
