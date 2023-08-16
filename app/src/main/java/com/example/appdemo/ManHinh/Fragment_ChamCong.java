@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -41,9 +42,6 @@ import java.util.ArrayList;
 public class Fragment_ChamCong extends Fragment {
 
     private CalendarView calendarView;
-
-
-    private ArrayList<String> dates;
     private Button btnAddChamCong;
     private RecyclerView rcChamCong;
     private EditText edtAddMaNvChamCong;
@@ -52,9 +50,9 @@ public class Fragment_ChamCong extends Fragment {
     private DatabaseReference databaseRef_chamCong, databaseRef_ngayCong, databaseRef_getId;
     public TextView tvNgayLam, tvNgayNghi;
     private ImageView ibtnBack;
-
+    private LinearLayout cNAdmin_chamCong;
     private int ngay, thang, nam;
-
+    String REGEX_MA_NV = "^nv\\d+";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -67,7 +65,12 @@ public class Fragment_ChamCong extends Fragment {
         tvNgayLam = view.findViewById(R.id.tvNgayLam);
         tvNgayNghi = view.findViewById(R.id.tvNgayNghi);
         ibtnBack = view.findViewById(R.id.ibtnBack);
+        cNAdmin_chamCong=view.findViewById(R.id.cNAdmin_chamCong);
 
+        if (LoginActivity.idGui.matches(REGEX_MA_NV)){
+            cNAdmin_chamCong.setVisibility(View.GONE);
+            btnAddChamCong.setVisibility(View.GONE);
+        }
         rcChamCong.setHasFixedSize(true);
         rcChamCong.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -127,11 +130,15 @@ public class Fragment_ChamCong extends Fragment {
                                         }
                                     });
                                     holder.tvMaNV.setText(maNV);
-
+                                    if (LoginActivity.idGui.matches(REGEX_MA_NV)){
+                                       holder.btnDelete.setVisibility(View.GONE);
+                                    }
                                     holder.itemView.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-
+                                            if (LoginActivity.idGui.matches(REGEX_MA_NV)){
+                                               return;
+                                            }
                                             databaseRef_ngayCong.child(holder.tvMaNV.getText().toString()).addValueEventListener(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
