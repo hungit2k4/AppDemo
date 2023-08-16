@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.appdemo.Apdapter.QuanLyNhanVienAdapter;
+import com.example.appdemo.ManHinh.DangKyNghi;
 import com.example.appdemo.ManHinh.InputCodeActivity;
 import com.example.appdemo.ManHinh.LoginActivity;
 import com.example.appdemo.ManHinh.QuanLyNhanVien;
@@ -43,10 +44,10 @@ public class FragmentHome extends Fragment {
         cNNhanVien = view.findViewById(R.id.cNNhanVien);
         btnAddNV = view.findViewById(R.id.btnAddNV);
         String check = "^admin\\w{0,}";
-        if (LoginActivity.idGui.matches(check))
-            cNNhanVien.setVisibility(View.GONE);
-        else
-            cNAdmin.setVisibility(View.GONE);
+//        if (LoginActivity.idGui.matches(check))
+//            cNNhanVien.setVisibility(View.GONE);
+//        else
+//            cNAdmin.setVisibility(View.GONE);
         btnCaNhan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +63,8 @@ public class FragmentHome extends Fragment {
         btnDKNghi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent =  new Intent(getActivity(), DangKyNghi.class);
+                startActivity(intent);
             }
         });
         btnDoiMK.setOnClickListener(new View.OnClickListener() {

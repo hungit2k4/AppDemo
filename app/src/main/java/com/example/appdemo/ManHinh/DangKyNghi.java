@@ -79,21 +79,16 @@ public class DangKyNghi extends AppCompatActivity {
         String check = "^admin\\w{0,}";
         boolean checkAccount = LoginActivity.idGui.matches(check);
 
-        Query query;
         if (checkAccount) {
             lyOffNV.setVisibility(View.GONE);
-            query = databaseReference;
-        } else {
-            query = databaseReference;
         }
 
-        FirebaseRecyclerOptions<XinNghi> options = new FirebaseRecyclerOptions.Builder<XinNghi>().setQuery(query, XinNghi.class).build();
+        FirebaseRecyclerOptions<XinNghi> options = new FirebaseRecyclerOptions.Builder<XinNghi>().setQuery(databaseReference, XinNghi.class).build();
         DatabaseReference finalDatabaseReference = databaseReference;
         FirebaseRecyclerAdapter<XinNghi, XinNghi_Adapter.ViewHolder> adapter = new FirebaseRecyclerAdapter<XinNghi, XinNghi_Adapter.ViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull XinNghi_Adapter.ViewHolder holder, int position, @NonNull XinNghi model) {
 
-                // nếu là tài khoản nhân viên thì get thẳng value, nếu là tài khoản admin thì getKey
                 String key = getRef(position).getKey();
                 finalDatabaseReference.child(key).addValueEventListener(new ValueEventListener() {
                     @Override
@@ -156,12 +151,12 @@ public class DangKyNghi extends AppCompatActivity {
                                         holder.ibtnCancel.setVisibility(View.GONE);
                                         holder.tvStatus.setVisibility(View.VISIBLE);
                                         holder.tvStatus.setText("Đã phản hồi đơn");
-                                        databaseReference.child(LoginActivity.idGui).setValue(xinNghi);
+                                        databaseReference.child(maNV).setValue(xinNghi);
 
                                         Notify notify = new Notify();
 
                                         notify.setContentNotify("Đơn xin phép của bạn đã được duyệt");
-                                        databaseRef_ThongBao.child(LoginActivity.idGui).setValue(notify);
+                                        databaseRef_ThongBao.child(maNV).setValue(notify);
 
                                     }
                                 });
@@ -170,8 +165,8 @@ public class DangKyNghi extends AppCompatActivity {
                                     @Override
                                     public void onClick(View v) {
                                         xinNghi.setMaNV(maNV);
-                                        xinNghi.setDateStart(dateStart);
-                                        xinNghi.setDateEnd(dateEnd);
+                                        xinNghi.setDateStart(ngayStart);
+                                        xinNghi.setDateEnd(ngayEnd);
                                         xinNghi.setLiDo(liDo);
                                         xinNghi.setStatus("2");
 
@@ -179,12 +174,12 @@ public class DangKyNghi extends AppCompatActivity {
                                         holder.ibtnCancel.setVisibility(View.GONE);
                                         holder.tvStatus.setVisibility(View.VISIBLE);
                                         holder.tvStatus.setText("Đã phản hồi đơn");
-                                        databaseReference.child(LoginActivity.idGui).setValue(xinNghi);
+                                        databaseReference.child(maNV).setValue(xinNghi);
 
                                         Notify notify = new Notify();
 
                                         notify.setContentNotify("Đơn xin phép của bạn không được duyệt");
-                                        databaseRef_ThongBao.child(LoginActivity.idGui).setValue(notify);
+                                        databaseRef_ThongBao.child(maNV).setValue(notify);
                                     }
                                 });
 
