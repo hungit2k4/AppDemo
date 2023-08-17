@@ -34,9 +34,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
-
             >
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -53,7 +51,27 @@
                 android:textSize="16sp"
                 />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lương"
+                android:textStyle="bold"
+                android:textColor="#47D84C"
+                android:textSize="16sp"/>
 
+            <TextView
+                android:id="@+id/tvLuong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="16sp"/>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -85,7 +103,6 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/black" />
-
 
     <LinearLayout
         android:id="@+id/cNAdmin_chamCong"

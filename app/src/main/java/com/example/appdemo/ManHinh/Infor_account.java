@@ -51,7 +51,6 @@ public class Infor_account extends AppCompatActivity {
             Picasso.get().load(Trang_Chu.old_url_avatar).into(imgInfor, new Callback() {
                 @Override
                 public void onSuccess() {
-                    Toast.makeText(Infor_account.this, "hfvsjdh", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override

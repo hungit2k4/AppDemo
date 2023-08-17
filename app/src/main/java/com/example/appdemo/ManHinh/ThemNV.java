@@ -230,7 +230,7 @@ public class ThemNV extends AppCompatActivity {
                                 } else {
 
                                     databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                                        Boolean checkTrungManvforThongTin = true;
+                                        Boolean checkTrungManvforThongTin = false;
 
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -314,20 +314,15 @@ public class ThemNV extends AppCompatActivity {
                         nhanVien.setGioiTinh(gioiTinh);
                         nhanVien.setNgaySinh(ngaySinh);
                         nhanVien.setSoDT(sDT);
-
-                        btnChinhSuaNV.setOnClickListener(new View.OnClickListener() {
+                        databaseRef.child(maNv).setValue(nhanVien).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void onClick(View v) {
-                                databaseRef.child(maNv).setValue(nhanVien).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        btnLuuNV.setVisibility(View.VISIBLE);
-                                        btnChinhSuaNV.setVisibility(View.GONE);
-                                        Toast.makeText(ThemNV.this, "Đã chỉnh sửa thành công", Toast.LENGTH_SHORT).show();
-                                        finish();
-                                        updateTenNV();
-                                    }
-                                });
+                            public void onSuccess(Void unused) {
+                                btnLuuNV.setVisibility(View.VISIBLE);
+                                btnChinhSuaNV.setVisibility(View.GONE);
+                                Toast.makeText(ThemNV.this, "Đã chỉnh sửa thành công", Toast.LENGTH_SHORT).show();
+
+                                updateTenNV();
+                                finish();
                             }
                         });
 
