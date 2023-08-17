@@ -148,6 +148,9 @@ public class Fragment_ChamCong extends Fragment {
 
                                                         tvNgayLam.setText(snapshot.child("ngayLam").getValue().toString() + " ngày");
                                                     }
+                                                   if (snapshot.hasChild("ngayNghi")){
+                                                       tvNgayNghi.setText(snapshot.child("ngayNghi").getValue().toString());
+                                                   }
 
                                                 }
 
