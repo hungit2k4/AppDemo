@@ -60,13 +60,14 @@
             android:layout_toEndOf="@+id/cardView"
             android:layout_below="@+id/tvHello"/>
 
-        <TextView
+        <ImageButton
             android:id="@+id/btnThongBao"
+            style="?attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableRight="@drawable/baseline_notifications_24"
-            android:layout_alignParentEnd="true"/>
-
+            android:src="@drawable/baseline_notifications_24"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"/>
 
         <TextView
             android:id="@+id/tvNoitify"
@@ -78,6 +79,8 @@
             android:textStyle="bold"
             android:layout_below="@+id/tvDate"/>
     </RelativeLayout>
+
+
 
 
     <FrameLayout

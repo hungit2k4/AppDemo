@@ -40,6 +40,7 @@ public class FragmentHome extends Fragment {
            btnDoiMK.setVisibility(View.GONE);
         else
             cNAdmin.setVisibility(View.GONE);
+
         btnCaNhan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,6 +48,7 @@ public class FragmentHome extends Fragment {
                 startActivity(intent);
             }
         });
+
         btnChamCong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

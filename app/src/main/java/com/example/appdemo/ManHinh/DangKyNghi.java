@@ -156,7 +156,7 @@ public class DangKyNghi extends AppCompatActivity {
 
                                         Notify notify = new Notify();
 
-                                        notify.setContentNotify("Đơn xin phép của bạn đã được duyệt");
+                                        notify.setContentNotify("Đơn xin phép của "+maNV+" đã được duyệt");
                                         databaseRef_ThongBao.child(maNV).setValue(notify);
 
                                     }
@@ -179,7 +179,7 @@ public class DangKyNghi extends AppCompatActivity {
 
                                         Notify notify = new Notify();
 
-                                        notify.setContentNotify("Đơn xin phép của bạn không được duyệt");
+                                        notify.setContentNotify("Đơn xin phép của "+maNV+" không được duyệt");
                                         databaseRef_ThongBao.child(maNV).setValue(notify);
                                     }
                                 });

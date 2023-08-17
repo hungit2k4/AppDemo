@@ -12,9 +12,11 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.appdemo.fragment.FragmentChat;
@@ -38,7 +40,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Trang_Chu extends AppCompatActivity {
-    TextView btnThongBao, tvDate, tvHello;
+    TextView  tvDate, tvHello;
+    ImageButton btnThongBao;
     LottieAnimationView loading_home;
     ImageView imageAvatar;
     public static RelativeLayout rltWelcome;
@@ -46,6 +49,7 @@ public class Trang_Chu extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     DatabaseReference databaseRef;
     StorageReference storageRef;
+    Fragment fragment;
     public static String inFullName, user, pass, key, old_url_avatar, old_url_background;
     public static int id;
 
@@ -122,8 +126,15 @@ public class Trang_Chu extends AppCompatActivity {
 
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-        Fragment fragment = new FragmentHome();
+        fragment = new FragmentHome();
         getSupportFragmentManager().beginTransaction().replace(R.id.frLayout, fragment).commit();
+
+        btnThongBao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(Trang_Chu.this, "asd", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -133,23 +144,25 @@ public class Trang_Chu extends AppCompatActivity {
                     item.setTitle("Home");
                     rltWelcome.setVisibility(View.VISIBLE);
                     fragmentBottom = new FragmentHome();
-                } else if (item.getItemId() == R.id.mChat) {
-                    item.setTitle("Chat");
+                } else if (item.getItemId() == R.id.bottom_noitify) {
+                    item.setTitle("Notify");
                     rltWelcome.setVisibility(View.GONE);
-                    fragmentBottom = new FragmentChat();
+                    fragmentBottom = new ThongBao();
                 } else if (item.getItemId() == R.id.bottom_profile) {
                     item.setTitle("Profile");
                     rltWelcome.setVisibility(View.GONE);
                     fragmentBottom = new FragmentProfile();
                 } else {
-                    item.setTitle("Notify");
+
+                    item.setTitle("Chat");
                     rltWelcome.setVisibility(View.GONE);
-                    fragmentBottom = new ThongBao();
+                    fragmentBottom = new FragmentChat();
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.frLayout, fragmentBottom).commit();
                 return true;
             }
         });
+
 
         imageAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
