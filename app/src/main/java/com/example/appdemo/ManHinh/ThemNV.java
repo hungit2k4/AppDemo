@@ -38,15 +38,16 @@ public class ThemNV extends AppCompatActivity {
     private Boolean accept = false;
     private String maNv, tenNv, ngaySinh, sDT, diaChi, email;
     private Integer gioiTinh;
-    private NhanVien nhanVien= new NhanVien();
+    private NhanVien nhanVien = new NhanVien();
     private TextView tvTitle;
-    Account account= new Account();
+    Account account = new Account();
     DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("thong tin nhan vien");
     DatabaseReference databaseRefAcount = FirebaseDatabase.getInstance().getReference("Account");
     String REGEX_MA_NV = "^nv\\d+";
     String REGEX_BIRTDAY = "^(0[1-9]|[1-2]\\d|3[0-1])/(0[1-9]|1[0-2])/\\d{4}$";
     String REGEX_PHONE_NUMBER = "(\\+?84|0)\\d{9,10}";
     String REGEX_EMAIL = "^[A-Za-z0-9]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,20 +67,22 @@ public class ThemNV extends AppCompatActivity {
         btnHuy = findViewById(R.id.btnHuy);
         btnLuuNV = findViewById(R.id.btnLuuNV);
         btnChinhSuaNV = findViewById(R.id.btnChinhSuaNV);
+
         Intent intent = getIntent();
         Integer c = intent.getIntExtra("check", 0);
-        String maNVFromAdapter= intent.getStringExtra("manv");
+
+        String maNVFromAdapter = intent.getStringExtra("manv");
 
         if (c == 1) {
-        //sua thong tin
+            //sua thong tin
 
             tvTitle.setText("Thay đổi thông tin nhân viên");
             databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot dataSnapshot: snapshot.getChildren()){
-                        String key= dataSnapshot.getRef().getKey();
-                        if (maNVFromAdapter.equals(key)){
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        String key = dataSnapshot.getRef().getKey();
+                        if (maNVFromAdapter.equals(key)) {
                             nhanVien = dataSnapshot.getValue(NhanVien.class);
                             break;
                         }
@@ -88,7 +91,7 @@ public class ThemNV extends AppCompatActivity {
                     edtMaNV.setText(maNVFromAdapter);
                     edtTenNV2.setText(nhanVien.getTen());
                     edtNgaySinh.setText(nhanVien.getNgaySinh());
-                    if (nhanVien.getGioiTinh()==1) rdoNam.setChecked(true);
+                    if (nhanVien.getGioiTinh() == 1) rdoNam.setChecked(true);
                     else rdoNu.setChecked(true);
                     edtSoDT.setText(nhanVien.getSoDT());
                     edtDiaChi.setText(nhanVien.getDiaChi());
@@ -134,16 +137,16 @@ public class ThemNV extends AppCompatActivity {
                                 edtEmail.setError("Email không đúng định dạng");
                                 edtEmail.requestFocus();
                             } else {
-                            nhanVien = new NhanVien(maNv, tenNv, ngaySinh, gioiTinh, sDT, diaChi, email);
+                                nhanVien = new NhanVien(maNv, tenNv, ngaySinh, gioiTinh, sDT, diaChi, email);
 
-                            databaseRef.child(maNVFromAdapter).setValue(nhanVien).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    finish();
-                                    updateTenNV();
-                                }
-                            });
-                        }
+                                databaseRef.child(maNVFromAdapter).setValue(nhanVien).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        finish();
+                                        updateTenNV();
+                                    }
+                                });
+                            }
                         }
                     });
                     btnHuy.setOnClickListener(new View.OnClickListener() {
@@ -338,13 +341,14 @@ public class ThemNV extends AppCompatActivity {
 
         }
     }
-    public void updateTenNV(){
+
+    public void updateTenNV() {
         databaseRefAcount.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot :snapshot.getChildren()){
-                    String key= dataSnapshot.getRef().getKey();
-                    if (key.equals(maNv)){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String key = dataSnapshot.getRef().getKey();
+                    if (key.equals(maNv)) {
                         account = dataSnapshot.getValue(Account.class);
                     }
                 }

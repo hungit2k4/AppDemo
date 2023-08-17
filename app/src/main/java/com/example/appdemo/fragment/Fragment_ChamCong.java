@@ -50,7 +50,7 @@ public class Fragment_ChamCong extends Fragment {
     private ArrayList<String> listKey;
     private String datekey, maNV;
     private DatabaseReference databaseRef_chamCong, databaseRef_ngayCong, databaseRef_getId;
-    public TextView tvNgayLam, tvNgayNghi,tvLuong;
+    public TextView tvNgayLam, tvNgayNghi;
     private ImageView ibtnBack;
     private LinearLayout cNAdmin_chamCong;
     private int ngay, thang, nam;
@@ -66,7 +66,6 @@ public class Fragment_ChamCong extends Fragment {
         edtAddMaNvChamCong = view.findViewById(R.id.edtAddMaNvChamCong);
         tvNgayLam = view.findViewById(R.id.tvNgayLam);
         tvNgayNghi = view.findViewById(R.id.tvNgayNghi);
-        tvLuong = view.findViewById(R.id.tvLuong);
         ibtnBack = view.findViewById(R.id.ibtnBack);
         cNAdmin_chamCong=view.findViewById(R.id.cNAdmin_chamCong);
 
@@ -139,22 +138,17 @@ public class Fragment_ChamCong extends Fragment {
                                     holder.itemView.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
+                                            if (LoginActivity.idGui.matches(REGEX_MA_NV)){
+                                               return;
+                                            }
                                             databaseRef_ngayCong.child(holder.tvMaNV.getText().toString()).addValueEventListener(new ValueEventListener() {
-                                                String ngayLam,ngayNghi;
-                                                Integer luong;
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                     if (snapshot.hasChild("ngayLam")) {
-                                                        ngayLam=  snapshot.child("ngayLam").getValue().toString();
-                                                        tvNgayLam.setText(snapshot.child("ngayLam").getValue().toString() + " ngày");
 
+                                                        tvNgayLam.setText(snapshot.child("ngayLam").getValue().toString() + " ngày");
                                                     }
-                                                    if (snapshot.hasChild("ngayNghi")) {
-                                                        ngayNghi = snapshot.child("ngayNghi").getValue().toString();
-                                                        tvNgayNghi.setText(snapshot.child("ngayNghi").getValue().toString() + " ngày");
-                                                    }
-                                                    luong= Integer.parseInt(ngayLam)*250;
-                                                    tvLuong.setText(luong+"000 VNĐ");
+
                                                 }
 
                                                 @Override
